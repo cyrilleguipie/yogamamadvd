@@ -5,7 +5,7 @@ html {
 }
 body {
 	color: #000000;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
 	margin: 0px;
 	padding: 0px;
 }
@@ -89,68 +89,31 @@ label {
 }
 /* header */
 #header {
-	height: 90px;
 	margin-bottom: 7px;
 	padding-bottom: 4px;
 	position: relative;
 	z-index: 99;
 }
 #header #logo {
-	position: absolute;
-	top: 25px;
-	left: 15px;
+	width: 200px;
+	float: left;
 }
 #language {
-	position: absolute;
-	top: 15px;
-	left: 335px;
-	width: 75px;
 	color: #999;
-	line-height: 17px;
+	text-align: right;
 }
 #language img {
 	cursor: pointer;
 }
-#currency {
-	width: 75px;
-	position: absolute;
-	top: 15px;
-	left: 425px;
-	color: #999;
-	line-height: 17px;
-}
-#currency a {
-	display: inline-block;
-	padding: 2px 4px;
-	border: 1px solid #CCC;
-	color: #999;
-	text-decoration: none;
-	margin-right: 2px;
-	margin-bottom: 2px;
-}
-#currency a b {
-	color: #000;
-	text-decoration: none;
-}
 #header #cart {
-	position: absolute;
-	top: 0px;
-	right: 145px;
-	z-index: 9;
-	min-width: 300px;
+	text-align: right;
 }
-#header #cart .heading {
-	float: right;
-	margin-right: 172px;
-	margin-top: 15px;
-	padding-left: 14px;
-	padding-right: 14px;
-	border-top: 1px solid #FFFFFF;
-	border-left: 1px solid #FFFFFF;
-	border-right: 1px solid #EEEEEE;
+#header .heading {
+	text-align: right;
 	background: #FFF;
-	position: relative;
 	z-index: 1;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 #header #cart .heading h4 {
 	color: #333333;
@@ -163,9 +126,9 @@ label {
 	color: #38B0E3;
 	text-decoration: none;
 }
-#header #cart .heading a span {
-	background: #FFFFFF url('../image/arrow-down.png') 100% 50% no-repeat;
-	padding-right: 15px;
+#header .heading a span {
+	background: #FFFFFF url('../image/cart.png') 1% 50% no-repeat;
+	padding-left: 20px;
 }
 #header #cart .content {
 	clear: both;
@@ -314,10 +277,11 @@ label {
 }
 /* menu */
 #menu {
-	background: #585858;
-	border-bottom: 1px solid #000000;
+    text-shadow: 0 -1px 2px #000;
+	background: url("../image/ui-bg_glass_75_555555_1x400.png") repeat-x scroll 50% 50% #555;
+	border-bottom: 1px solid #AAAAAA;
 	height: 37px;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 	-webkit-border-radius: 5px 5px 5px 5px;
 	-moz-border-radius: 5px 5px 5px 5px;
 	-khtml-border-radius: 5px 5px 5px 5px;
@@ -336,9 +300,10 @@ label {
 	position: relative;
 	float: left;
 	z-index: 20;	
+	border-right: 1px solid #AAAAAA;
 }
 #menu > ul > li:hover {
-	background: #000;
+	background: url("../image/ui-bg_glass_75_222222_1x400.png") repeat-x scroll 50% 50% #5c5c5c;
 }
 #menu > ul > li > a {
 	font-size: 13px;
@@ -346,7 +311,7 @@ label {
 	line-height: 14px;
 	text-decoration: none;
 	display: block;
-	padding: 12px 15px 11px 15px;
+	padding: 12px 15px 10px 15px;
 	z-index: 6;
 	position: relative;
 }
@@ -381,7 +346,6 @@ label {
 	min-width: 120px;
 }
 #menu > ul > li ul > li > a:hover {
-	background: #000000;
 }
 #menu > ul > li > div > ul > li > a {
 	color: #FFFFFF;
@@ -815,6 +779,7 @@ a.button:hover span {
 .product-list > div {
 	overflow: auto;
 	margin-bottom: 15px;
+	padding-top: 16px;
 }
 .product-list .right {
 	float: right;
@@ -822,7 +787,6 @@ a.button:hover span {
 }
 .product-list > div + div {
 	border-top: 1px solid #EEEEEE;
-	padding-top: 16px;
 }
 .product-list .image {
 	float: left;

@@ -11,4 +11,8 @@ $_['text_account']   = 'Личный Кабинет';
 $_['text_checkout']  = 'Оформить';
 $_['text_language']  = 'Язык';
 $_['text_currency']  = 'Валюта';
+
+$_['text_order']    = 'Заказать';
+$_['text_contact']  = 'Контакты';
+$_['text_faq']      = 'Вопросы и ответы';
 ?>
