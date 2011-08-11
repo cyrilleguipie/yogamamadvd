@@ -11,4 +11,7 @@ $_['text_account']  = 'My Account';
 $_['text_checkout'] = 'Checkout';
 $_['text_language'] = 'Language';
 $_['text_currency'] = 'Currency';
+$_['text_order']    = 'Order';
+$_['text_contact']  = 'Contact Us';
+$_['text_faq']      = 'FAQ';
 ?>

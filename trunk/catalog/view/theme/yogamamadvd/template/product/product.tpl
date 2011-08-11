@@ -1,4 +1,4 @@
-<?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
+<?php echo $header; ?><!-- ?php echo $column_left; ? --><?php echo $column_right; ?>
 <div id="content"><?php echo $content_top; ?>
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -181,10 +181,7 @@
         <div><?php echo $text_qty; ?>
           <input type="text" name="quantity" size="2" value="<?php echo $minimum; ?>" />
           <input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" />
-          &nbsp;<a id="button-cart" class="button"><span><?php echo $button_cart; ?></span></a></div>
-        <div><span>&nbsp;&nbsp;&nbsp;<?php echo $text_or; ?>&nbsp;&nbsp;&nbsp;</span></div>
-        <div><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a><br />
-          <a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></div>
+          &nbsp;<a onclick="addToCart('<?php echo $product_id; ?>', $('#image'), $('.product-info input[type=\'text\']')[0].value);" class="button"><span><?php echo $button_cart; ?></span></a></div>
         <?php if ($minimum > 1) { ?>
         <div class="minimum"><?php echo $text_minimum; ?></div>
         <?php } ?>
@@ -274,7 +271,7 @@
       <?php foreach ($products as $product) { ?>
       <div>
         <?php if ($product['thumb']) { ?>
-        <div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a></div>
+        <div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" id="image-related"/></a></div>
         <?php } ?>
         <div class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
         <?php if ($product['price']) { ?>
@@ -289,7 +286,7 @@
         <?php if ($product['rating']) { ?>
         <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>
         <?php } ?>
-        <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button"><span><?php echo $button_cart; ?></span></a></div>
+        <a href="index.php?route=checkout/cart" onclick="addToCart('<?php echo $product['product_id']; ?>', $('#image-related'));" class="button"><span><?php echo $button_cart; ?></span></a></div>
       <?php } ?>
     </div>
   </div>
@@ -305,7 +302,7 @@
 <script type="text/javascript"><!--
 $('.fancybox').fancybox({cyclic: true});
 //--></script>
-<script type="text/javascript"><!--
+<script type="application/javascript"><!--
 $('#button-cart').bind('click', function() {
 	$.ajax({
 		url: 'index.php?route=checkout/cart/update',
@@ -334,7 +331,22 @@ $('#button-cart').bind('click', function() {
 					
 				$('#cart_total').html(json['total']);
 				
-				$('html, body').animate({ scrollTop: 0 }, 'slow'); 
+				$('html, body').animate({ scrollTop: 0 }, 'slow');
+				
+				var image = $('#image').offset();
+				var cart = $('#cart_total').offset();
+				$('#image').before('<img src="' + $('#image').attr('src') + '" id="temp" style="position: absolute; top: ' + image.top 
+				     + 'px; left: ' + image.left + 'px;" />');
+				params = {
+					top : cart.top + 'px',
+					left : cart.left + 'px',
+					opacity : 0.0,
+					width : $('#cart_total').width(),
+					height : $('#cart_total').height()
+				};
+				$('#temp').animate(params, 'slow', function () {
+					$('#temp').remove();
+				});
 			}	
 		}
 	});
