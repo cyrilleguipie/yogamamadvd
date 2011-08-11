@@ -62,7 +62,7 @@ DD_belatedPNG.fix('#logo img');
 	<li><a href="#" style="padding: 7px; "><img src="catalog/view/theme/yogamamadvd/image/ylogos.png" width="24"></a></li>
 	<li><a href="<?php echo $home; ?>"><?php echo $text_home; ?></a></li>
     <li><a href="index.php?route=product/category&amp;path=59"><?php echo $text_order; ?></a></a>
-	<li><a href="index.php?route=information/contactx"><?php echo $text_contact; ?></a></li>
+	<li><a href="index.php?route=information/contact"><?php echo $text_contact; ?></a></li>
 	<li><a href="#"><?php echo $text_faq; ?></a></li>
   </ul>
 </div>
