@@ -7,6 +7,7 @@ import java.util.*;
 
 import models.*;
 
+@With(Security.class)
 public class Application extends Controller {
 
     public static void index() {
@@ -21,13 +22,5 @@ public class Application extends Controller {
     public static void show(Long id) {
         Product product = Product.findById(id);
         render(product);
-    }
-
-    @Before
-    static void setConnectedUser() {
-        if(Security.isConnected()) {
-            User user = User.find("byEmail", Security.connected()).first();
-            renderArgs.put("user", user.fullname);
-        }
     }
 }
