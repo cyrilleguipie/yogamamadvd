@@ -37,10 +37,10 @@
 		<div id="header">
 		  <div id="welcome">
 		    #{if !user}
-		    &{'text_welcome'}
+		    &{'text_welcome', actionBridge.Account.index().url, actionBridge.Account.register().url}
 		    #{/if}
 		    #{else}
-		    &{'text_logged', user, logout}
+		    &{'text_logged', actionBridge.Account.index().url, user, actionBridge.Account.logout(request.url).url}
 		    #{/else}
 		  </div>
 
@@ -49,8 +49,8 @@
 
 		<div id="menu">
 		  <ul>
-			<li><a href="@{index}" style="padding: 7px; "><img src="@{'/public/images/logo-small.png'}" width="24"></a></li>
-			<li><a href="@{index}">&{'text_home'}</a></li>
+			<li><a href="@{Application.index()}" style="padding: 7px; "><img src="@{'/public/images/logo-small.png'}" width="24"></a></li>
+			<li><a href="@{Application.index()}">&{'text_home'}</a></li>
 		    <li><a href="@{Application.list()}">&{'text_order'}</a></li>
 			<li><a href="#">&{'text_contact'}</a></li>
 			<li><a href="#">&{'text_faq'}</a></li>

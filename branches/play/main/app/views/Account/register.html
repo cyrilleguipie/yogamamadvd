@@ -1,0 +1,173 @@
+#{extends 'main.html' /}
+#{set title:'Йога для будущих мам' /}
+
+<div id="content">
+  #{breadcrumb ['text_account', 'text_register'] /}
+  <h1>&{'heading_register'}</h1>
+  #{if error_warning}
+  <div class="warning">&{'error_warning'}</div>
+  #{/if}
+  <p>&{'text_account_already'}</p>
+  <form action="&{'action'}" method="post" enctype="multipart/form-data" id="register">
+    <h2>&{'text_your_details'}</h2>
+    <div class="content">
+      <table class="form">
+        <tr>
+          <td><span class="required">*</span> &{'entry_firstname'}</td>
+          <td><input type="text" name="firstname" value="${params.firstname}" />
+            #{if error_firstname}
+            <span class="error">&{'error_firstname'}</span>
+            #{/if}</td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> &{'entry_lastname'}</td>
+          <td><input type="text" name="lastname" value="${params.lastname}" />
+            #{if error_lastname}
+            <span class="error">&{'error_lastname'}</span>
+            #{/if}</td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> &{'entry_email'}</td>
+          <td><input type="text" name="email" value="${params.email}" />
+            #{if error_email}
+            <span class="error">&{'error_email'}</span>
+            #{/if}</td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> &{'entry_telephone'}</td>
+          <td><input type="text" name="telephone" value="${params.telephone}" />
+            #{if error_telephone}
+            <span class="error">&{'error_telephone'}</span>
+            #{/if}</td>
+        </tr>
+        <tr>
+          <td>&{'entry_fax'}</td>
+          <td><input type="text" name="fax" value="${params.fax}" /></td>
+        </tr>
+      </table>
+    </div>
+    <h2>&{'text_your_address'} </h2>
+    <div class="content">
+      <table class="form">
+        <tr>
+          <td>&{'entry_company'}</td>
+          <td><input type="text" name="company" value="${params.company}" /></td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> &{'entry_address_1'}</td>
+          <td><input type="text" name="address_1" value="${params.address_1}" />
+            #{if error_address_1}
+            <span class="error">&{'error_address_1'}</span>
+            #{/if}</td>
+        </tr>
+        <tr>
+          <td>&{'entry_address_2'}</td>
+          <td><input type="text" name="address_2" value="${params.address_2}" /></td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> &{'entry_city'}</td>
+          <td><input type="text" name="city" value="${params.city}" />
+            #{if error_city}
+            <span class="error">&{'error_city'}</span>
+            #{/if}</td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> &{'entry_postcode'}</td>
+          <td><input type="text" name="postcode" value="${params.postcode}" />
+            #{if error_postcode}
+            <span class="error">&{'error_postcode'}</span>
+            #{/if}</td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> &{'entry_country'}</td>
+          <td><select name="country_id" onchange="$('select[name=\'zone_id\']').load('index.php?route=account/register/zone&country_id=' + this.value + '&zone_id=&{'zone_id'}');">
+              <option value="">&{'text_select'}</option>
+              <?php foreach ($countries as $country) { ?>
+              #{if country?.id == country_id}
+              <option value="&{'country.id'}" selected="selected">&{'country.name'}</option>
+              #{/if}
+              #{else}
+              <option value="&{'country.id'}">&{'country.name'}</option>
+              #{/else}
+            </select>
+            #{if error_country}
+            <span class="error">&{'error_country'}</span>
+            #{/if}</td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> &{'entry_zone'}</td>
+          <td><select name="zone_id">
+            </select>
+            #{if error_zone}
+            <span class="error">&{'error_zone'}</span>
+            #{/if}</td>
+        </tr>
+      </table>
+    </div>
+    <h2>&{'text_your_password'}</h2>
+    <div class="content">
+      <table class="form">
+        <tr>
+          <td><span class="required">*</span> &{'entry_password'}</td>
+          <td><input type="password" name="password" value="${params.password}" />
+            #{if error_password}
+            <span class="error">&{'error_password'}</span>
+            #{/if}</td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> &{'entry_confirm'}</td>
+          <td><input type="password" name="confirm" value="${params.confirm}" />
+            #{if error_confirm}
+            <span class="error">&{'error_confirm'}</span>
+            #{/if}</td>
+        </tr>
+      </table>
+    </div>
+    <h2>&{'text_newsletter'}</h2>
+    <div class="content">
+      <table class="form">
+        <tr>
+          <td>&{'entry_newsletter'}</td>
+          <td>#{if newsletter == 1}
+            <input type="radio" name="newsletter" value="1" checked="checked" />
+            &{'text_yes'}
+            <input type="radio" name="newsletter" value="0" />
+            &{'text_no'}
+            <?php } else { ?>
+            <input type="radio" name="newsletter" value="1" />
+            &{'text_yes'}
+            <input type="radio" name="newsletter" value="0" checked="checked" />
+            &{'text_no'}
+            #{/if}</td>
+        </tr>
+      </table>
+    </div>
+    #{if text_agree}
+    <div class="buttons">
+      <div class="right">&{'text_agree'}
+        #{if agree}
+        <input type="checkbox" name="agree" value="1" checked="checked" />
+        <?php } else { ?>
+        <input type="checkbox" name="agree" value="1" />
+        #{/if}
+        <a onclick="$('#register').submit();" class="button"><span>&{'button_continue'}</span></a></div>
+    </div>
+    <?php } else { ?>
+    <div class="buttons">
+      <div class="right"><a onclick="$('#register').submit();" class="button"><span>&{'button_continue'}</span></a></div>
+    </div>
+    #{/if}
+  </form>
+</div>
+#{set moreScripts}
+<script type="text/javascript"><!--
+$('select[name=\'zone_id\']').load("index.php?route=account/register/zone&country_id=&{'country_id'}&zone_id=&{'zone_id'}");
+//--></script> 
+<script type="text/javascript"><!--
+$('.fancybox').fancybox({
+	width: 560,
+	height: 560,
+	autoDimensions: false
+});
+//--></script>  
+#{/set}

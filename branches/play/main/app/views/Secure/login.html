@@ -1,0 +1,51 @@
+#{extends 'main.html' /}
+#{set title:'Йога для будущих мам' /}
+
+<div id="content">
+  #{breadcrumb ['text_acount', 'text_login'] /}
+  <h1>&{'heading_login'}</h1>
+  #{if flash.success}
+  <div class="success">&{flash.success}</div>
+  #{/if}
+  #{if flash.error}
+  <div class="warning">&{flash.error}</div>
+  #{/if}
+  <div class="login-content">
+    <div class="left">
+      <h2>&{'text_new_customer'}</h2>
+      <div class="content">
+        <p><b>&{'text_register'}</b></p>
+        <p>&{'text_register_account'}</p>
+        <a href="@{Account.register()}" class="button"><span>&{'button_continue'}</span></a></div>
+    </div>
+    <div class="right">
+      <h2>&{'text_returning_customer'}</h2>
+      <form action="@{authenticate}" method="post" enctype="application/x-www-form-urlencoded" accept-charset="utf-8" id="login">
+        <div class="content">
+          <p>&{'text_i_am_returning_customer'}</p>
+          <b>&{'entry_email'}</b><br />
+          <input type="text" name="username" value="${params.username}" />
+          <br />
+          <br />
+          <b>&{'entry_password'}</b><br />
+          <input type="password" name="password" value="" />
+          <br />
+	      <input type="checkbox" name="remember" id="remember" value="true" ${flash.remember ? 'checked="true"' : ''} />
+	      <label for="remember">&{'secure.remember'}</label>
+          <br />
+          <br />
+          <a onclick="$('#login').submit();" class="button"><span>&{'button_login'}</span></a>
+          <a href="#" class="button"><span>&{'text_forgotten'}</span></a>
+        </div>
+      </form>
+    </div>
+  </div>
+#{set moreScripts}
+<script type="text/javascript"><!--
+$('#login input').keydown(function(e) {
+	if (e.keyCode == 13) {
+		$('#login').submit();
+	}
+});
+//--></script>   
+#{/set}

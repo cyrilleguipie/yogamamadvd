@@ -1,6 +1,0 @@
-Listening for transport dt_socket at address: 61479
-23:34:08,804 INFO  ~ Starting /opt/yoga/svn/branches/play/main
-23:34:08,809 WARN  ~ Declaring modules in application.conf is deprecated. Use dependencies.yml instead (module.crud)
-23:34:08,809 INFO  ~ Module crud is available (/opt/play-1.2.2/modules/crud)
-23:34:09,705 WARN  ~ You're running Play! in DEV mode
-23:34:09,893 ERROR ~ Could not bind on port 9000
