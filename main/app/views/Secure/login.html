@@ -16,20 +16,27 @@
       <div class="content">
         <p><b>&{'text_register'}</b></p>
         <p>&{'text_register_account'}</p>
-        <a href="@{Account.register()}" class="button"><span>&{'button_continue'}</span></a></div>
+        <a href="@{Account.register}" class="button"><span>&{'button_continue'}</span></a></div>
     </div>
     <div class="right">
       <h2>&{'text_returning_customer'}</h2>
-      <form action="@{authenticate}" method="post" enctype="application/x-www-form-urlencoded" accept-charset="utf-8" id="login">
+      <form action="@{Secure.authenticate}" method="post" enctype="application/x-www-form-urlencoded" accept-charset="utf-8" id="login">
         <div class="content">
           <p>&{'text_i_am_returning_customer'}</p>
           <b>&{'entry_email'}</b><br />
           <input type="text" name="username" value="${params.username}" />
           <br />
+          #{ifError 'username'}
+            <span class="error">#{error 'username' /}</span>
+          #{/ifError}
           <br />
           <b>&{'entry_password'}</b><br />
           <input type="password" name="password" value="" />
           <br />
+          #{ifError 'password'}
+            <span class="error">#{error 'password' /}</span>
+            <br/>
+          #{/ifError}
 	      <input type="checkbox" name="remember" id="remember" value="true" ${flash.remember ? 'checked="true"' : ''} />
 	      <label for="remember">&{'secure.remember'}</label>
           <br />
@@ -40,7 +47,7 @@
       </form>
     </div>
   </div>
-#{set moreScripts}
+#{set 'moreScripts'}
 <script type="text/javascript"><!--
 $('#login input').keydown(function(e) {
 	if (e.keyCode == 13) {

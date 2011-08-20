@@ -17,7 +17,7 @@ format_price = %s руб.
 
 product_yoga = Йога для будущих мам
 
-# Account
+# Account - login
 heading_login = Логин
 
 text_account = Личный Кабинет
@@ -35,4 +35,48 @@ entry_password = Пароль:
 secure.remember = Запомнить
 secure.error = Не верный E-Mail и/или пароль!
 sucure.success = Успех!
+
+# Account - register
+heading_register=Регистрация
+
+text_account=Личный Кабинет
+text_register=Регистрация
+text_account_already=Если Вы уже зарегистрированы, перейдите на страницу <a href="%s">входа в систему</a>.
+text_your_details=Основные данные
+text_your_address=Ваш адрес
+text_newsletter=Подписка на новости
+text_your_password=Ваш пароль
+text_agree=Я прочитал и принимаю <a class="thickbox" href="%s" alt="%s"><b>%s</b></a>
+text_select=--- Выберите ---
+
+entry_firstname=Имя Отчество:
+entry_lastname=Фамилия:
+entry_email=E-Mail:
+entry_telephone=Телефон:
+entry_fax=Факс:
+entry_company=Компания:
+entry_address_1=Адрес 1:
+entry_address_2=Адрес 2:
+entry_postcode=Индекс:
+entry_city=Город:
+entry_country=Страна:
+entry_zone=Регион / Область:
+entry_newsletter=Подписаться:
+entry_password=Пароль:
+entry_confirm=Повтор пароля:
+
+error_exists=Этот E-Mail уже зарегистрирован!
+error_firstname=Имя должно содержать от 1 до 32 символов!
+error_lastname=Фамилия должна содержать от 1 до 32 символов!
+error_email=E-Mail введён не правильно!
+error_telephone=В телефоне должно быть от 3 до 32 цифр!
+error_password=В пароле должно быть от 4 до 20 символов!
+error_confirm=Пароли не совподают!
+error_address_1=Адрес должен содержать от 3 до 128 символов!
+error_city=Город должен содержать от 2 до 128 символов!
+error_postcode=В индексе должно быть от 2 до 10 символов!
+error_country=Выберите страну!
+error_zone=Выберите регион / область!
+error_agree=Для совершения покупок Вы должны быть согласны с %s!
+
 
