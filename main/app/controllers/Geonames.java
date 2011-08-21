@@ -44,6 +44,24 @@ public class Geonames extends Controller {
 	    return getGeonames("countryInfoJSON?maxRows=300");
     }
 
+    public static void reset() {
+	    VirtualFile vf = VirtualFile.fromRelativePath("/cache/");
+	    File directory = vf.getRealFile();
+
+	    File[] toBeDeleted = directory.listFiles(new FileFilter() {  
+		    public boolean accept(File theFile) {  
+			    if (theFile.isFile()) {  
+				    return theFile.getName().startsWith("geonames-");  
+			    }  
+			    return false;  
+		    }  
+	    });  
+	    for (File deletableFile:toBeDeleted) {  
+		    deletableFile.delete();  
+	    }
+	
+    }
+
     // JSON
     public static void zones(@Required String countryId) throws IOException {
 	    if (!validation.hasErrors()) {

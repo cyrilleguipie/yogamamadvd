@@ -48,6 +48,8 @@ text_newsletter=Подписка на новости
 text_your_password=Ваш пароль
 text_agree=Я прочитал и принимаю <a class="thickbox" href="%s" alt="%s"><b>%s</b></a>
 text_select=--- Выберите ---
+text_yes=Да
+text_no=Нет
 
 entry_firstname=Имя Отчество:
 entry_lastname=Фамилия:
@@ -65,13 +67,15 @@ entry_newsletter=Подписаться:
 entry_password=Пароль:
 entry_confirm=Повтор пароля:
 
+error_validation=Обязательные поля не заполлнены или заполнены не верно, проверьте и повторите регистрацию.
 error_exists=Этот E-Mail уже зарегистрирован!
 error_firstname=Имя должно содержать от 1 до 32 символов!
 error_lastname=Фамилия должна содержать от 1 до 32 символов!
 error_email=E-Mail введён не правильно!
-error_telephone=В телефоне должно быть от 3 до 32 цифр!
+error_telephone=В телефоне должно быть от 3 до 20 цифр! Например: +7 123456789.
 error_password=В пароле должно быть от 4 до 20 символов!
 error_confirm=Пароли не совподают!
+validation.equals=Пароли не совподают!
 error_address_1=Адрес должен содержать от 3 до 128 символов!
 error_city=Город должен содержать от 2 до 128 символов!
 error_postcode=В индексе должно быть от 2 до 10 символов!
