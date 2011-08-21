@@ -9,7 +9,7 @@ public class Security extends Secure.Security {
 	static void setConnectedUser() throws Throwable {
 	    if(Security.isConnected()) {
 	        User user = User.find("byEmail", Security.connected()).first();
-	        renderArgs.put("user", user.fullname);
+	        renderArgs.put("user", user.firstname);
 	    }
 	}
 

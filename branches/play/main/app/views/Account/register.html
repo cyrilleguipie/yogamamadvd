@@ -4,45 +4,45 @@
 <div id="content">
   #{breadcrumb ['text_account', 'text_register'] /}
   <h1>&{'heading_register'}</h1>
-  #{if error_warning}
-  <div class="warning">&{'error_warning'}</div>
+  #{if flash.error}
+  <div class="warning">&{flash.error}</div>
   #{/if}
   <p>&{'text_account_already', actionBridge.Account.index().url}</p>
-  <form action="&{'action'}" method="post" enctype="multipart/form-data" id="register">
+  <form action="@{Account.create}" method="post" enctype="multipart/form-data" id="register">
     <h2>&{'text_your_details'}</h2>
     <div class="content">
       <table class="form">
         <tr>
           <td><span class="required">*</span> &{'entry_firstname'}</td>
-          <td><input type="text" name="firstname" value="${params.firstname}" />
-            #{if error_firstname}
-            <span class="error">&{'error_firstname'}</span>
-            #{/if}</td>
+          <td><input type="text" name="user.firstname" value="${flash['user.firstname']}" />
+            #{ifError 'user.firstname'}
+            <span class="error">#{error 'user.firstname'/}</span>
+            #{/ifError}</td>
         </tr>
         <tr>
           <td><span class="required">*</span> &{'entry_lastname'}</td>
-          <td><input type="text" name="lastname" value="${params.lastname}" />
-            #{if error_lastname}
-            <span class="error">&{'error_lastname'}</span>
-            #{/if}</td>
+          <td><input type="text" name="user.lastname" value="${flash['user.lastname']}" />
+            #{ifError 'user.lastname'}
+            <span class="error">#{error 'user.lastname'/}</span>
+            #{/ifError}</td>
         </tr>
         <tr>
           <td><span class="required">*</span> &{'entry_email'}</td>
-          <td><input type="text" name="email" value="${params.email}" />
-            #{if error_email}
-            <span class="error">&{'error_email'}</span>
-            #{/if}</td>
+          <td><input type="text" name="user.email" value="${flash['user.email']}" />
+            #{ifError 'user.email'}
+            <span class="error">#{error 'user.email'/}</span>
+            #{/ifError}</td>
         </tr>
         <tr>
           <td><span class="required">*</span> &{'entry_telephone'}</td>
-          <td><input type="text" name="telephone" value="${params.telephone}" />
-            #{if error_telephone}
-            <span class="error">&{'error_telephone'}</span>
-            #{/if}</td>
+          <td><input type="text" name="user.telephone" value="${flash['user.telephone']}" />
+            #{ifError 'user.telephone'}
+            <span class="error">#{error 'user.telephone'/}</span>
+            #{/ifError}</td>
         </tr>
         <tr>
           <td>&{'entry_fax'}</td>
-          <td><input type="text" name="fax" value="${params.fax}" /></td>
+          <td><input type="text" name="user.fax" value="${flash['user.fax']}" /></td>
         </tr>
       </table>
     </div>
@@ -51,39 +51,39 @@
       <table class="form">
         <tr>
           <td>&{'entry_company'}</td>
-          <td><input type="text" name="company" value="${params.company}" /></td>
+          <td><input type="text" name="user.company" value="${flash['user.company']}" /></td>
         </tr>
         <tr>
           <td><span class="required">*</span> &{'entry_address_1'}</td>
-          <td><input type="text" name="address_1" value="${params.address_1}" />
-            #{if error_address_1}
-            <span class="error">&{'error_address_1'}</span>
-            #{/if}</td>
+          <td><input type="text" name="user.address_1" value="${flash['user.address_1']}" />
+            #{ifError 'user.address_1'}
+            <span class="error">#{error 'user.address_1'/}</span>
+            #{/ifError}</td>
         </tr>
         <tr>
           <td>&{'entry_address_2'}</td>
-          <td><input type="text" name="address_2" value="${params.address_2}" /></td>
+          <td><input type="text" name="user.address_2" value="${flash['user.address_2']}" /></td>
         </tr>
         <tr>
           <td><span class="required">*</span> &{'entry_city'}</td>
-          <td><input type="text" name="city" value="${params.city}" />
-            #{if error_city}
-            <span class="error">&{'error_city'}</span>
-            #{/if}</td>
+          <td><input type="text" name="user.city" value="${flash['user.city']}" />
+            #{ifError 'user.city'}
+            <span class="error">#{error 'user.city'/}</span>
+            #{/ifError}</td>
         </tr>
         <tr>
           <td><span class="required">*</span> &{'entry_postcode'}</td>
-          <td><input type="text" name="postcode" value="${params.postcode}" />
-            #{if error_postcode}
-            <span class="error">&{'error_postcode'}</span>
-            #{/if}</td>
+          <td><input type="text" name="user.postcode" value="${flash['user.postcode']}" />
+            #{ifError 'user.postcode'}
+            <span class="error">#{error 'user.postcode'/}</span>
+            #{/ifError}</td>
         </tr>
         <tr>
           <td><span class="required">*</span> &{'entry_country'}</td>
-          <td><select name="country_id" onchange="loadZones(this.value)	;">
+          <td><select name="user.country_id" onchange="loadZones(this.value)	;">
               <option value="">&{'text_select'}</option>
               #{list items:countries, as:'country'}
-              #{if country.geonameId == params.country_id}
+              #{if country.geonameId?.asString == flash['user.country_id']}
               <option value="${country.geonameId?.asString}" selected="selected">${country.countryName?.asString}</option>
               #{/if}
               #{else}
@@ -91,17 +91,19 @@
               #{/else}
               #{/list}
             </select>
-            #{if error_country}
-            <span class="error">${'error_country'}</span>
-            #{/if}</td>
+            <input id="country" type="hidden" name="user.country" value="${flash['user.country']}"/>
+            #{ifError 'user.country'}
+            <span class="error">#{error 'user.country'/}</span>
+            #{/ifError}</td>
         </tr>
         <tr>
           <td><span class="required">*</span> &{'entry_zone'}</td>
-          <td><select name="zone_id">
+          <td><select name="user.zone_id" onchange="$('#zone').attr('value', $('select[name=\'user.zone_id\'] option:selected').text());">
             </select>
-            #{if error_zone}
-            <span class="error">&{'error_zone'}</span>
-            #{/if}</td>
+            <input id="zone" type="hidden" name="user.zone" value="${flash['user.zone']}"/>
+            #{ifError 'user.zone'}
+            <span class="error">#{error 'user.zone'/}</span>
+            #{/ifError}</td>
         </tr>
       </table>
     </div>
@@ -110,17 +112,17 @@
       <table class="form">
         <tr>
           <td><span class="required">*</span> &{'entry_password'}</td>
-          <td><input type="password" name="password" value="${params.password}" />
-            #{if error_password}
-            <span class="error">&{'error_password'}</span>
-            #{/if}</td>
+          <td><input type="password" name="user.password" value="${flash['user.password']}" />
+            #{ifError 'user.password'}
+            <span class="error">#{error 'user.password'/}</span>
+            #{/ifError}</td>
         </tr>
         <tr>
           <td><span class="required">*</span> &{'entry_confirm'}</td>
-          <td><input type="password" name="confirm" value="${params.confirm}" />
-            #{if error_confirm}
-            <span class="error">&{'error_confirm'}</span>
-            #{/if}</td>
+          <td><input type="password" name="user.confirm" value="${flash['user.confirm']}" />
+            #{ifError 'user.confirm'}
+            <span class="error">#{error 'user.confirm'/}</span>
+            #{/ifError}</td>
         </tr>
       </table>
     </div>
@@ -129,57 +131,62 @@
       <table class="form">
         <tr>
           <td>&{'entry_newsletter'}</td>
-          <td>#{if newsletter == 1}
-            <input type="radio" name="newsletter" value="1" checked="checked" />
+          <td>#{if flash['user.newsletter'] == 1}
+            <input type="radio" name="user.newsletter" value="1" checked="checked" />
             &{'text_yes'}
-            <input type="radio" name="newsletter" value="0" />
+            <input type="radio" name="user.newsletter" value="0" />
             &{'text_no'}
-            <?php } else { ?>
-            <input type="radio" name="newsletter" value="1" />
+            #{/if}
+            #{else}
+            <input type="radio" name="user.newsletter" value="1" />
             &{'text_yes'}
-            <input type="radio" name="newsletter" value="0" checked="checked" />
+            <input type="radio" name="user.newsletter" value="0" checked="checked" />
             &{'text_no'}
-            #{/if}</td>
+            #{/else}</td>
         </tr>
       </table>
     </div>
     #{if text_agree}
     <div class="buttons">
       <div class="right">&{'text_agree'}
-        #{if agree}
-        <input type="checkbox" name="agree" value="1" checked="checked" />
-        <?php } else { ?>
-        <input type="checkbox" name="agree" value="1" />
+        #{if flash['user.agree']}
+        <input type="checkbox" name="user.agree" value="1" checked="checked" />
         #{/if}
+        #{else}
+        <input type="checkbox" name="user.agree" value="1" />
+        #{/else}
         <a onclick="$('#register').submit();" class="button"><span>&{'button_continue'}</span></a></div>
     </div>
-    <?php } else { ?>
+    #{/if}
+    #{else}
     <div class="buttons">
       <div class="right"><a onclick="$('#register').submit();" class="button"><span>&{'button_continue'}</span></a></div>
     </div>
-    #{/if}
+    #{/else}
   </form>
 </div>
 #{set 'moreScripts'}
 <script type="text/javascript"><!--
-function loadZones(countryId) {
-  if (countryId != undefined && countryId.length > 0) {
-    $.getJSON("@{Geonames.zones()}" + "?countryId=" + countryId, null, function(j){
+function loadZones(country_id) {
+  if (country_id != undefined && country_id.length > 0) {
+	$('#country').attr('value', $('select[name=\'user.country_id\'] option:selected').text());
+
+    $.getJSON("@{Geonames.zones()}" + "?countryId=" + country_id, null, function(j){
       var options = '<option value="">&{'text_select'}</option>';
 	  for (var i = 0; i < j.geonames.length; i++) {
-        if (j.geonames[i].geonameId == "${params.zone_id}") {
-          options += '<option value="' + j.geonames[i].geonameId  + ' selected="selected">' + j.geonames[i].name + '</option>';
+        if (j.geonames[i].geonameId == "${flash['user.zone_id']}") {
+          options += '<option value="' + j.geonames[i].geonameId  + '" selected="selected">' + j.geonames[i].name + '</option>';
         } else {
           options += '<option value="' + j.geonames[i].geonameId + '">' + j.geonames[i].name + '</option>';
         }
       }
-      $('select[name=\'zone_id\']').html(options);
+      $('select[name=\'user.zone_id\']').html(options);
     })
   }
 }
 
 $(function() {
-  loadZones($('select[name=\'country_id\']')[0].value);
+  loadZones($('select[name=\'user.country_id\']')[0].value);
 })
 
 //--></script> 
