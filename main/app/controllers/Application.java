@@ -11,16 +11,16 @@ import models.*;
 public class Application extends Controller {
 
     public static void index() {
-        render();
+	render();
     }
 
     public static void list() {
-        List<Product> products = Product.find("order by id asc").fetch(3);
-        render(products);
+	List<Product> products = Product.find("order by id asc").fetch(3);
+	render(products);
     }
 
     public static void show(Long id) {
-        Product product = Product.findById(id);
-        render(product);
+	Product product = Product.findById(id);
+	render(product);
     }
 }
