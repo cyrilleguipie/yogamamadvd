@@ -127,7 +127,7 @@ label {
 	text-decoration: none;
 }
 #header .heading a span {
-	background: #FFFFFF url('/public/images/cart.png') 1% 50% no-repeat;
+	background: #FFFFFF url('../images/cart.png') 1% 50% no-repeat;
 	padding-left: 20px;
 }
 #header #cart .content {
@@ -227,7 +227,7 @@ label {
 #header .button-search {
 	position: absolute;
 	left: 0px;
-	background: url('/public/images/button-search.png') center center no-repeat;
+	background: url('../images/button-search.png') center center no-repeat;
 	width: 28px;
 	height: 24px;
 	border-right: 1px solid #CCCCCC;
@@ -278,7 +278,7 @@ label {
 /* menu */
 #menu {
     text-shadow: 0 -1px 2px #000;
-	background: url("/public/images/ui-bg_glass_75_555555_1x400.png") repeat-x scroll 50% 50% #555;
+	background: url("../images/ui-bg_glass_75_555555_1x400.png") repeat-x scroll 50% 50% #555;
 	border-bottom: 1px solid #AAAAAA;
 	height: 37px;
 	margin-bottom: 10px;
@@ -303,7 +303,7 @@ label {
 	border-right: 1px solid #AAAAAA;
 }
 #menu > ul > li:hover {
-	background: url("/public/images/ui-bg_glass_75_222222_1x400.png") repeat-x scroll 50% 50% #5c5c5c;
+	background: url("../images/ui-bg_glass_75_222222_1x400.png") repeat-x scroll 50% 50% #5c5c5c;
 }
 #menu > ul > li > a {
 	font-size: 13px;
@@ -326,7 +326,7 @@ label {
 	-moz-border-radius: 0px 0px 5px 5px;
 	-khtml-border-radius: 0px 0px 5px 5px;
 	border-radius: 0px 0px 5px 5px;
-	background: url('/public/images/menu.png');
+	background: url('../images/menu.png');
 }
 #menu > ul > li:hover > div {
 	display: table;
@@ -360,19 +360,19 @@ label {
 	color: #555555;
 }
 .success {
-	background: #EAF7D9 url('/public/images/success.png') 10px center no-repeat;
+	background: #EAF7D9 url('../images/success.png') 10px center no-repeat;
 	border: 1px solid #BBDF8D;
 }
 .warning {
-	background: #FFD1D1 url('/public/images/warning.png') 10px center no-repeat;
+	background: #FFD1D1 url('../images/warning.png') 10px center no-repeat;
 	border: 1px solid #F8ACAC;
 }
 .attention {
-	background: #FFF5CC url('/public/images/attention.png') 10px center no-repeat;
+	background: #FFF5CC url('../images/attention.png') 10px center no-repeat;
 	border: 1px solid #F2DD8C;
 }
 .information {
-	background: #E8F6FF url('/public/images/information.png') 10px center no-repeat;
+	background: #E8F6FF url('../images/information.png') 10px center no-repeat;
 	border: 1px solid #B8E2FB;
 }
 .success .close, .warning .close, .attention .close, .information .close {
@@ -454,11 +454,11 @@ table.list .center {
 }
 table.list .asc {
 	padding-right: 15px;
-	background: url('/public/images/asc.png') right center no-repeat;
+	background: url('../images/asc.png') right center no-repeat;
 }
 table.list .desc {
 	padding-right: 15px;
-	background: url('/public/images/desc.png') right center no-repeat;
+	background: url('../images/desc.png') right center no-repeat;
 }
 .pagination {
 	border-top: 1px solid #EEEEEE;
@@ -494,7 +494,7 @@ table.list .desc {
 a.button {
 	display: inline-block;
 	padding-left: 6px;
-	background: url('/public/images/button-left.png') top left no-repeat;
+	background: url('../images/button-left.png') top left no-repeat;
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -505,14 +505,14 @@ a.button span {
 	font-weight: bold;
 	display: inline-block;
 	padding: 6px 12px 8px 5px;
-	background: url('/public/images/button-right.png') top right no-repeat;
+	background: url('../images/button-right.png') top right no-repeat;
 }
 a.button:hover {
-	background: url('/public/images/button-left-active.png') top left no-repeat;
+	background: url('../images/button-left-active.png') top left no-repeat;
 }
 a.button:hover span {
 	color: #FFFFFF;
-	background: url('/public/images/button-right-active.png') top right no-repeat;
+	background: url('../images/button-right-active.png') top right no-repeat;
 }
 .buttons {
 	background: #FFFFFF;
@@ -543,7 +543,7 @@ a.button:hover span {
 	border-top: 1px solid #DDDDDD;
 	border-left: 1px solid #DDDDDD;
 	border-right: 1px solid #DDDDDD; 
-	background: #FFFFFF url('/public/images/tab.png') repeat-x;
+	background: #FFFFFF url('../images/tab.png') repeat-x;
 	padding: 7px 15px 6px 15px;
 	float: left;
 	font-family: Arial, Helvetica, sans-serif;
@@ -578,7 +578,7 @@ a.button:hover span {
 	-khtml-border-radius: 7px 7px 0px 0px;
 	border-radius: 7px 7px 0px 0px;
 	border: 1px solid #DBDEE1;
-	background: url('/public/images/background.png') repeat-x;
+	background: url('../images/background.png') repeat-x;
 	padding: 8px 10px 7px 10px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
@@ -843,14 +843,14 @@ a.button:hover span {
 	text-decoration: none;
 	padding-left: 18px;
 	display: block;
-	background: url('/public/images/add.png') left center no-repeat;
+	background: url('../images/add.png') left center no-repeat;
 }
 .product-list .compare a {
 	color: #333333;
 	text-decoration: none;
 	padding-left: 18px;
 	display: block;
-	background: url('/public/images/add.png') left 60% no-repeat;
+	background: url('../images/add.png') left 60% no-repeat;
 }
 .product-grid {
 	width: 100%;
@@ -912,14 +912,14 @@ a.button:hover span {
 	text-decoration: none;
 	padding-left: 18px;
 	display: block;
-	background: url('/public/images/add.png') left center no-repeat;
+	background: url('../images/add.png') left center no-repeat;
 }
 .product-grid .compare a {
 	color: #333333;
 	text-decoration: none;
 	padding-left: 18px;
 	display: block;
-	background: url('/public/images/add.png') left center no-repeat;
+	background: url('../images/add.png') left center no-repeat;
 }
 /* Product */
 .product-info {
@@ -1378,10 +1378,10 @@ a.button:hover span {
 	color: #555555;
 	margin-bottom: 15px;
 	cursor: pointer;
-	background: #F8F8F8 url('/public/images/arrow-right.png') 10px 50% no-repeat;
+	background: #F8F8F8 url('../images/arrow-right.png') 10px 50% no-repeat;
 }
 .cart-module .active {
-	background: #F8F8F8 url('/public/images/arrow-down.png') 7px 50% no-repeat;
+	background: #F8F8F8 url('../images/arrow-down.png') 7px 50% no-repeat;
 }
 .cart-module .cart-content {
 	padding: 0px 0px 15px 0px;

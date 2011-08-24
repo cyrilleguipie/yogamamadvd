@@ -17,7 +17,7 @@ import java.io.*;
 public class Geonames extends Controller {
 
     private static JsonObject getGeonamesLocal(VirtualFile vf) throws IOException  {
-	    Reader in = new InputStreamReader(new GZIPInputStream(vf.inputstream()));
+	    Reader in = new InputStreamReader(new GZIPInputStream(vf.inputstream()), "UTF-8");
 	    JsonElement geonames = new JsonParser().parse(in);
 	    return geonames.getAsJsonObject();
     }
@@ -72,6 +72,6 @@ public class Geonames extends Controller {
 		}
     }
 
-    // TODO: aoutcomplete cities: http://ws.geonames.org/searchJSON?featureClass=P&country=US&style=short
+    // TODO: autocomplete cities: http://ws.geonames.org/searchJSON?featureClass=P&country=US&style=short
     //  but it requires countryCode instead of geonameId
 }
