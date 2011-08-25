@@ -63,10 +63,25 @@ label {
 	cursor: pointer;
 }
 /* layout */
+#wrapper {
+	width: 1380px;
+	margin: auto;
+}
+#background-left {
+	background: url('../image/green-pattern.png') repeat;
+	float: left;
+	width: 200px;
+	margin: auto;
+}
+#background-right{
+	background: url('../image/blue-pattern.png') repeat;
+	float: right;
+	width: 200px;
+	margin: auto;
+}
 #container {
 	width: 980px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: auto;
 	text-align: left;
 }
 #column-left {
@@ -112,8 +127,8 @@ label {
 	text-align: right;
 	background: #FFF;
 	z-index: 1;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 #header #cart .heading h4 {
 	color: #333333;
@@ -248,13 +263,7 @@ label {
 	box-shadow: 0px 2px 0px #F0F0F0;	
 }
 #header #welcome {
-	position: absolute;
-	top: 47px;
-	right: 0px;
-	z-index: 5;
-	width: 298px;
-	text-align: right;
-	color: #999999;
+	float: left;
 }
 #header .links {
 	position: absolute;
@@ -277,8 +286,13 @@ label {
 }
 /* menu */
 #menu {
-    text-shadow: 0 -1px 2px #000;
-	background: url("../image/ui-bg_glass_75_555555_1x400.png") repeat-x scroll 50% 50% #555;
+	background: url("../image/ui-bg_glass.png") no-repeat scroll 0 0 #006f7c; /* fallback for any browser that doesn't do gradients */
+	background: url("../image/ui-bg_glass.png"), -webkit-gradient(linear, left top, right top, from(#028855), to(#007ac3))  no-repeat scroll 0 0 #006f7c; /* Saf4+, Chrome */
+	background: url("../image/ui-bg_glass.png"), -webkit-linear-gradient(left, #028855, #007ac3) no-repeat scroll 0 0 #006f7c; /* Chrome 10+, Saf5.1+ */
+	background: url("../image/ui-bg_glass.png"), -moz-linear-gradient(left, #028855, #007ac3)  no-repeat scroll 0 0 #006f7c; /* FF3.6+ */
+	background: url("../image/ui-bg_glass.png"), -ms-linear-gradient(left, #028855, #007ac3)  no-repeat scroll 0 0 #006f7c; /* IE10 */
+	background: url("../image/ui-bg_glass.png"), -o-linear-gradient(left, #028855, #007ac3)  no-repeat scroll 0 0 #006f7c; /* Opera 11.10+ */
+	background: url("../image/ui-bg_glass.png"), linear-gradient(left, #028855, #007ac3)  no-repeat scroll 0 0 #006f7c; /* W3C */
 	border-bottom: 1px solid #AAAAAA;
 	height: 37px;
 	margin-bottom: 10px;
@@ -303,7 +317,7 @@ label {
 	border-right: 1px solid #AAAAAA;
 }
 #menu > ul > li:hover {
-	background: url("../image/ui-bg_glass_75_222222_1x400.png") repeat-x scroll 50% 50% #5c5c5c;
+    text-shadow: 0 -1px 2px #FFF;
 }
 #menu > ul > li > a {
 	font-size: 13px;
@@ -1495,7 +1509,6 @@ a.button:hover span {
 }
 /* footer */ 
 #footer {
-	clear: both;
 	overflow: auto;
 	min-height: 100px;
 	padding: 20px;
@@ -1532,7 +1545,6 @@ a.button:hover span {
 #powered {
 	margin-top: 5px;
 	text-align: right;
-	clear: both;
 }
 /* banner */
 .banner div {
