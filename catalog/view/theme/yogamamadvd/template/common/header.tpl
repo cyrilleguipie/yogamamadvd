@@ -42,19 +42,27 @@ DD_belatedPNG.fix('#logo img');
 </script>
 <![endif]-->
 <?php echo $google_analytics; ?>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('div[id ^= "background"]').height($('#container').height());
+});
+</script>
 </head>
 <body>
+<div id="wrapper">
+<div id="background-left"></div>
+<div id="background-right"></div>
 <div id="container">
 <div id="header">
-  <div id="welcome">
-    <?php if (!$logged) { ?>
-    <?php echo $text_welcome; ?>
-    <?php } else { ?>
-    <?php echo $text_logged; ?>
-    <?php } ?>
-  </div>
-  
   <div class="heading">
+	  <div id="welcome">
+	    <?php if (!$logged) { ?>
+	    <?php echo $text_welcome; ?>
+	    <?php } else { ?>
+	    <?php echo $text_logged; ?>
+	    <?php } ?>
+	  </div>
+
     <a href="index.php?route=checkout/cart"><span id="cart_total"><?php echo $text_items; ?></span></a></div>
 
 <div id="menu">
