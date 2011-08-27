@@ -6,7 +6,8 @@
 GET     /                                       Application.index
 GET     /product                                Application.list
 GET     /product/{id}                           Application.show
-GET	    /admin                                  module:crud
+POST    /addToCart                              Application.addToCart
+GET     /admin                                  module:crud
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
