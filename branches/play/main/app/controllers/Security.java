@@ -11,6 +11,7 @@ public class Security extends Secure.Security {
 	    User user = User.find("byEmail", Security.connected()).first();
 	    renderArgs.put("user", user.firstname);
 	}
+	renderArgs.put("cart", Checkout.getCart());
     }
 
     static boolean authenticate(String username, String password) {

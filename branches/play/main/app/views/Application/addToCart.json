@@ -1,3 +1,0 @@
-{ "success": "${messages.get('text_success', actionBridge.Application.show(product.id).url, product.name, '#').escapeJavaScript()}",
-  "total": "&{'text_items', cart.items, cart.total}"
- }

@@ -24,7 +24,6 @@ public class Geonames extends Controller {
     }
 
     private static JsonObject getGeonames(String ws) throws IOException {
-	JsonElement geonames;
 	VirtualFile vf = VirtualFile.fromRelativePath("/cache/geonames-"
 	        + ws.replace('?', '_') + "-" + Lang.get() + ".json.gz");
 	if (!vf.exists()) {
