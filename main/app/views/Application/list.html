@@ -11,11 +11,11 @@
 	#{list items:products, as:'product'}
     <div>
       <div class="right">
-        <div class="cart"><a onclick="addToCart('${product.id}', $('#image${product.id}'));" class="button"><span>&{'button_cart'}</span></a></div>
+        <div class="cart"><a onclick="addToCart('@{Application.addToCart}', '${product.id}', $('#image${product.id}'), 1, '@{'/public/images'}');" class="button"><span>&{'button_cart'}</span></a></div>
       </div>
 	  <div class="left">
         #{if product.thumb}
-        <div class="image"><a href="@{Application.show(product.id)}"><img src="${product.thumb}" title="${product.name}" alt="${product.name}" id="image${product.id}" /></a></div>
+        <div class="image"><a href="@{Application.show(product.id)}"><img src="@{'/public/images'}/${product.thumb}" title="${product.name}" alt="${product.name}" id="image${product.id}" /></a></div>
         #{/if}
         #{if product.price}
         <div class="price">

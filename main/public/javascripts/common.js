@@ -94,15 +94,11 @@ $('.success img, .warning img, .attention img, .information img').live('click', 
 	});
 });
 
-function addToCart(product_id, image_el, quantity) {
-	var $data = 'product_id=' + product_id;
-	if (quantity != undefined) {
-		$data += '&quantity=' + quantity;
-	}
+function addToCart(url, product_id, image_el, quantity, imagesUrl) {
 	$.ajax({
-		url: 'index.php?route=checkout/cart/update',
+		url: url,
 		type: 'post',
-		data:  $data,
+		data:  'productId=' + product_id + '&quantity=' + quantity,
 		dataType: 'json',
 		success: function(json) {
 			$('.success, .warning, .attention, .information, .error').remove();
@@ -113,12 +109,12 @@ function addToCart(product_id, image_el, quantity) {
 			
 			if (json['error']) {
 				if (json['error']['warning']) {
-					$('#notification').html('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					$('#notification').html('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="' + imagesUrl + '/close.png" alt="" class="close" /></div>');
 				}
 			}	 
 						
 			if (json['success']) {
-				$('#notification').html('<div class="attention" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+				$('#notification').html('<div class="attention" style="display: none;">' + json['success'] + '<img src="' + imagesUrl + '/close.png" alt="" class="close" /></div>');
 				
 				$('.attention').fadeIn('slow');
 				
@@ -143,8 +139,13 @@ function addToCart(product_id, image_el, quantity) {
 						$('#temp').remove();
 					});
 				}
-			}	
+			}
 		}
+		/*,
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(errorThrown)
+        }
+        */  
 	});
 }
 
