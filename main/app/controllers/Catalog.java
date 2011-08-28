@@ -7,7 +7,7 @@ import models.Product;
 import play.mvc.Controller;
 import play.mvc.With;
 
-@With(Security.class)
+@With({Security.class, Checkout.class})
 public class Catalog extends Controller {
 
     public static void list() {
