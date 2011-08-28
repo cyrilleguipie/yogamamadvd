@@ -19,7 +19,7 @@ import com.google.gson.reflect.TypeToken;
 
 import models.*;
 
-@With(Security.class)
+@With({Security.class, Checkout.class})
 public class Application extends Controller {
 
     public static void index() {
