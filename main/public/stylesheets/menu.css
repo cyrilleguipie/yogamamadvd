@@ -1,23 +1,25 @@
 #menu {
-    height: 50px;
-    width: 980px;
+    height: 60px;
     font: 14px/20px arial,sans-serif;
     text-align: center;
 }
 
-#menu-inner {
-    border: #AAA 1px solid;
+#menu ul {
+    border: #CCC 1px solid;
+    border-top: 0;
     float: right;
-    background-color: #C8C8C8;
+    background-color: #ace0f0;
     -moz-border-radius-bottomleft:5px;
     border-bottom-left-radius:5px;
     -moz-border-radius-bottomright:5px;
     border-bottom-right-radius:5px;
     padding: 2px;
+    margin: 0;
+    list-style: none;
 }
 
-#menu-home {
-    border-right: #AAA 1px solid;
+#menu ul li:nth-child(1) {
+    border-right: #CCC 1px solid;
     color: white;
     float: left;
     padding: 5px;
@@ -25,14 +27,14 @@
     cursor: pointer;
     vertical-align: center;
 }
-#menu-order, #menu-account  {
-    border-right: #AAA 1px solid;
+#menu ul li:nth-child(2), #menu ul li:nth-child(3) {
+    border-right: #CCC 1px solid;
     float: left;
     padding: 5px;
     width: 100px;
     cursor: pointer;
 }
-#menu-faq {
+#menu ul li:nth-child(4) {
     float: left;
     padding: 5px;
     width: 110px;
@@ -47,4 +49,7 @@
     z-index: 6;
     position: relative;
     opacity:1;
+}
+#menu a:hover {
+    text-decoration: underline;
 }
