@@ -5,7 +5,9 @@
     <head>
         <title>#{get 'title' /}</title>
         <meta charset="${_response_encoding}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}" type="text/css" >
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/menu.css'}" type="text/css" >
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/nav.css'}" type="text/css" >
         #{get 'moreStyles' /}
 
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}"/>
@@ -36,27 +38,17 @@
     <body>
 		<div id="container">
 		<div id="header">
-		  <div id="welcome">
-		    #{if !user}
-		    &{'text_welcome', actionBridge.Account.index().url, actionBridge.Account.register().url}
-		    #{/if}
-		    #{else}
-		    &{'text_logged', actionBridge.Account.index().url, user, actionBridge.Account.logout(request.url).url}
-		    #{/else}
-		  </div>
-
-		  <div class="heading">
-		    <a href="@{Checkout.cart}"><span id="cart_total">&{'text_items', cart?.quantity, cart?.total}</span></a></div>
-
-		<div id="menu">
-		  <ul>
-			<li><a href="@{Application.index()}" style="padding: 7px; "><img src="@{'/public/images/logo-small.png'}" width="24"></a></li>
-			<li><a href="@{Application.index()}">&{'text_home'}</a></li>
-		    <li><a href="@{Catalog.list()}">&{'text_order'}</a></li>
-			<li><a href="#">&{'text_contact'}</a></li>
-			<li><a href="#">&{'text_faq'}</a></li>
-		  </ul>
-		</div>
+            <div id="menu">
+                <div id="menu-inner">
+                    <div id="menu-home"><a href="@{Application.index()}">&{'text_home'}</a></div>
+                    <div id="menu-order"><a href="@{Catalog.list()}">&{'text_order'}</a></div>
+                    <div id="menu-account"><a href="@{Account.index()}">&{'text_account'}</a></div>
+                    <div id="menu-faq"><a href="#">&{'text_faq'}</a></div>
+                </div>
+            </div>
+           <div class="heading">
+             <a href="@{Checkout.cart}"><span id="cart_total">&{'text_items', cart?.quantity, cart?.total}</span></a>
+           </div>
 		<div id="notification"></div>
         #{doLayout /}
 		<div id="footer">

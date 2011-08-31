@@ -1,0 +1,50 @@
+#menu {
+    height: 50px;
+    width: 980px;
+    font: 14px/20px arial,sans-serif;
+    text-align: center;
+}
+
+#menu-inner {
+    border: #AAA 1px solid;
+    float: right;
+    background-color: #C8C8C8;
+    -moz-border-radius-bottomleft:5px;
+    border-bottom-left-radius:5px;
+    -moz-border-radius-bottomright:5px;
+    border-bottom-right-radius:5px;
+    padding: 2px;
+}
+
+#menu-home {
+    border-right: #AAA 1px solid;
+    color: white;
+    float: left;
+    padding: 5px;
+    width: 100px;
+    cursor: pointer;
+    vertical-align: center;
+}
+#menu-order, #menu-account  {
+    border-right: #AAA 1px solid;
+    float: left;
+    padding: 5px;
+    width: 100px;
+    cursor: pointer;
+}
+#menu-faq {
+    float: left;
+    padding: 5px;
+    width: 110px;
+    cursor: pointer;
+}
+#menu a {
+    font-size: 13px;
+    color: #333;
+    line-height: 16px;
+    text-decoration: none;
+    display: block;
+    z-index: 6;
+    position: relative;
+    opacity:1;
+}
