@@ -36,15 +36,17 @@
         #{get 'moreScripts' /}
     </head>
     <body>
+        <div id="logo"><img src="@{'/public/images'}/logo.png" alt="&{'logo'}" title="&{'logo'}"/></div>
 		<div id="container">
 		<div id="header">
+            <div id="product"><img src="@{'/public/images'}/product.png" alt="&{'product'}" title="&{'product'}"/></div>
             <div id="menu">
-                <div id="menu-inner">
-                    <div id="menu-home"><a href="@{Application.index()}">&{'text_home'}</a></div>
-                    <div id="menu-order"><a href="@{Catalog.list()}">&{'text_order'}</a></div>
-                    <div id="menu-account"><a href="@{Account.index()}">&{'text_account'}</a></div>
-                    <div id="menu-faq"><a href="#">&{'text_faq'}</a></div>
-                </div>
+                <ul>
+                    <li><a href="@{Application.index()}">&{'text_home'}</a></li>
+                    <li><a href="@{Catalog.list()}">&{'text_order'}</a></li>
+                    <li><a href="@{Account.index()}">&{'text_account'}</a></li>
+                    <li><a href="#">&{'text_faq'}</a></li>
+                </ul>
             </div>
            <div class="heading">
              <a href="@{Checkout.cart}"><span id="cart_total">&{'text_items', cart?.quantity, cart?.total}</span></a>
@@ -53,10 +55,8 @@
         #{doLayout /}
 		<div id="footer">
 		  <ul>
-			<li><a href="#">&{'text_about'}</a></li>
 		    <li><a href="#">&{'text_affiliate'}</a></li>
 			<li><a href="#">&{'text_terms'}</a></li>
-			<li><a href="#">&{'text_policy'}</a></li>
 		  </ul>
 		</div>
 		<div id="powered">&{'powered'}</div>

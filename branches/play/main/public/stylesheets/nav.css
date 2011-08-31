@@ -82,7 +82,7 @@
 }
 
 #nav ul li:nth-child(3) a {
-  background: url("../images/ui-bg_glass-3.png") left top;
+  background: url("../images/ui-bg_glass-3.png") left -90px;
   width: 205px;
 }
 
@@ -97,7 +97,7 @@
 }
 
 #nav ul li:nth-child(4) a {
-  background: url("../images/ui-bg_glass-4.png") left top;
+  background: url("../images/ui-bg_glass-4.png") left -90px;
   -moz-border-radius-bottomright: 5px;
   -moz-border-radius-topright: 5px;
   -webkit-border-bottom-right-radius: 5px;

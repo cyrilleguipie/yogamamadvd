@@ -15,7 +15,12 @@ button_login = Войти
 
 format_price = %s руб.
 
-product_yoga = Йога для будущих мам
+product = Йога для будущих мам
+logo = Life Yoga Club
+
+text_affiliate = Партнерская программа
+text_terms = Пользовательское соглашение
+powered = 2011 &copy; LifeYogaClub,<br/><a href="mailto:info@lyc.com">info@lyc.com</a>
 
 ########################################### Account - login ##################################################
 heading_login = Логин

@@ -50,6 +50,10 @@ label {
 	cursor: pointer;
 }
 /* layout */
+#logo {
+    position: absolute;
+    left: 180px;
+}
 #container {
 	width: 880px;
 	margin-left: auto;
@@ -67,7 +71,7 @@ label {
 #content {
 	min-height: 400px;
 	margin-bottom: 25px;
-	width: 830px;
+	width: 850px;
 	margin: auto;
 }
 #column-left + #column-right + #content, #column-left + #content {
@@ -82,9 +86,10 @@ label {
 	position: relative;
 	z-index: 99;
 }
-#header #logo {
-	width: 200px;
+#header #product {
+	width: 400px;
 	float: left;
+	margin-left: 20px;
 }
 #header .heading {
     float: right;
@@ -1250,6 +1255,12 @@ a.button:hover span {
 	float: left;
 	padding: 10px;
 }
+
+#footer ul li a{
+    color: #000000;
+    text-decoration: none;
+}
+
 #footer a:hover {
 	text-decoration: underline;
 }
@@ -1257,12 +1268,4 @@ a.button:hover span {
 	margin-top: 5px;
 	text-align: right;
 	clear: both;
-}
-/* banner */
-.banner div {
-	text-align: center;
-	width: 100%;
-}
-.banner div img {
-	margin-bottom: 20px;
 }
