@@ -31,16 +31,17 @@
   float: left;
   margin: 0 0 0 -20px;
   position: relative;
-}
-
-#nav ul li a {
   color: #FFF;
-  display: block;
   -webkit-font-smoothing: antialiased;
   line-height: 30px;
   height: 30px;
   text-align: center;
   text-shadow: 0 -1px 1px rgba(0, 0, 0, .75);
+  cursor: default;
+}
+
+#nav ul li a {
+  color: #FFF;
   text-decoration: none;
 }
 
