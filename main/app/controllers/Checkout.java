@@ -12,6 +12,7 @@ import models.Product;
 
 import play.Logger;
 import play.data.validation.CheckWith;
+import play.data.validation.Email;
 import play.data.validation.Required;
 import play.libs.Crypto;
 import play.mvc.Before;
@@ -132,8 +133,11 @@ public class Checkout extends Controller {
 	}
     }
 
-    public static void setShipmentWithCreate(@Required String firstname, @Required String lastname,
-	    @Required @CheckWith(Account.Unique.class) String email, @Required String shipment) {
+    public static void setShipmentWithCreate(@Required(message = "error_firstname") String firstname,
+	    @Required(message = "error_lastname") String lastname,
+	    @Required(message = "error_email") @Email(message = "error_email")
+	    @CheckWith(Account.Unique.class) String email,
+	    @Required String shipment) {
 	if (!validation.hasErrors()) {
 	    User user = Account.createShort(firstname, lastname, email);
 	    session.put("username", user.email);

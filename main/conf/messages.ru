@@ -46,7 +46,7 @@ heading_register=Регистрация
 
 text_account=Личный Кабинет
 text_register=Регистрация
-text_account_already=Если Вы уже зарегистрированы, перейдите на страницу <a href="%2$s">входа в систему</a>.
+text_account_already=Если Вы уже зарегистрированы, воспользуйтесь <a href="%2$s">входом в личный кабинет</a>.
 text_your_details=Основные данные
 text_your_address=Ваш адрес
 text_newsletter=Подписка на новости
