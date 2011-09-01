@@ -1,8 +1,7 @@
 #{extends 'main.html' /}
 #{set title:'Йога для будущих мам - Корзина' /}
 
-<div id="content">
-  #{breadcrumb ['text_cart'] /}
+#{nav cart:'active', checkout:'disabled'/}
 
 #{if cart.quantity > 0}
     <h1>&{'heading_cart'}

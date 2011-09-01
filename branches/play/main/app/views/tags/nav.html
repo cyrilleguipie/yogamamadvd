@@ -1,11 +1,11 @@
   <div id="nav">
     <ul>
-      <li><a href="#connect">Выбор способа доставки</a></li>
+      <li class="${_shipment}"><a href="@{Checkout.shipment()}">Выбор способа доставки</a></li>
 
-      <li><a href="#command"">Выбор способа оплаты</a></li>
+      <li class="${_payment}"><a href="@{Checkout.payment()}">Выбор способа оплаты</a></li>
 
-      <li><a href="#command"">Выбор курса</a></li>
+      <li class="${_cart}"><a href="@{Checkout.cart()}">Выбор курса</a></li>
 
-      <li><a href="#command"">Заказ</a></li>
+      <li class="${_checkout}"><a href="@{Checkout.checkout()}">Заказ</a></li>
     </ul>
   </div>
