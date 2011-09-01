@@ -10,10 +10,8 @@ import models.User;
 import models.Cart.Item;
 import models.Product;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
-
 import play.Logger;
+import play.data.validation.CheckWith;
 import play.data.validation.Required;
 import play.libs.Crypto;
 import play.mvc.Before;
@@ -26,18 +24,7 @@ public class Checkout extends Controller {
 
     @Before
     static void setCart() throws Throwable {
-	Cart cart = null;
-	String c = getCookie("cart");
-	if (c != null) {
-	    try {
-		cart = new Gson().fromJson(c, Cart.class);
-	    } catch(JsonParseException e) {
-		Logger.warn("Invalid cart, ingoring: %s, %s", c, e.getMessage());
-	    }
-	}
-	if (cart == null) {
-	    cart = new Cart();
-	}
+	Cart cart = Cart.fromJson(getCookie("cart"));
 	renderArgs.put("cart", cart);
     }
 
@@ -55,8 +42,7 @@ public class Checkout extends Controller {
 	}
 	Cart cart = getCart();
 	cart.add(productId, quantity, product.price);
-	String json = new Gson().toJson(cart);
-	setCookie("cart", json);
+	setCookie("cart", cart.toJson());
 	
 	//renderTemplate("/app/views/Checkout/addToCart.json", cart, product); 
 	render(cart, product);
@@ -110,8 +96,7 @@ public class Checkout extends Controller {
 		}
 	    }
 
-	    String json = new Gson().toJson(cart);
-	    setCookie("cart", json);
+	    setCookie("cart", cart.toJson());
 	}
 
 	cart();
@@ -122,11 +107,44 @@ public class Checkout extends Controller {
     }
 
     public static void payment() {
-	render();
+	if (getCart().shipment != null) {
+	    render();
+	} else {
+	    shipment();
+	}
     }
 
     public static void checkout() {
 	shipment();
     }
-    
+
+    public static void setShipment(@Required String shipment) {
+	if (!validation.hasErrors()) {
+	    Cart cart = getCart();
+	    cart.shipment = shipment;
+	    setCookie("cart", cart.toJson());
+	    payment();
+	} else {
+	    flash.error("error_validation");
+	    params.flash(); // add http parameters to the flash scope
+	    validation.keep(); // keep the errors for the next request
+	    Checkout.shipment();
+	}
+    }
+
+    public static void setShipmentWithCreate(@Required String firstname, @Required String lastname,
+	    @Required @CheckWith(Account.Unique.class) String email, @Required String shipment) {
+	if (!validation.hasErrors()) {
+	    User user = Account.createShort(firstname, lastname, email);
+	    session.put("username", user.email);
+	    Security.setConnectedUser();
+	    setShipment(shipment);
+	} else {
+	    flash.error("error_validation");
+	    params.flash(); // add http parameters to the flash scope
+	    validation.keep(); // keep the errors for the next request
+	    Checkout.shipment();
+	}
+    }
+
 }

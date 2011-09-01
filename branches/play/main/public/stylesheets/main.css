@@ -91,6 +91,9 @@ label {
 	float: left;
 	margin-left: 20px;
 }
+#header #welcome {
+    float: right;
+}
 #header .heading {
     float: right;
 }

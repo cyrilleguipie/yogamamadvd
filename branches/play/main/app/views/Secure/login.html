@@ -18,32 +18,7 @@
         <a href="@{Account.register}" class="button"><span>&{'button_continue'}</span></a></div>
     </div>
     <div class="right">
-      <h2>&{'text_returning_customer'}</h2>
-      <form action="@{Secure.authenticate}" method="post" enctype="application/x-www-form-urlencoded" accept-charset="utf-8" id="login">
-        <div class="content">
-          <p>&{'text_i_am_returning_customer'}</p>
-          <b>&{'entry_email'}</b><br />
-          <input type="text" name="username" value="${params.username}" />
-          <br />
-          #{ifError 'username'}
-            <span class="error">#{error 'username' /}</span>
-          #{/ifError}
-          <br />
-          <b>&{'entry_password'}</b><br />
-          <input type="password" name="password" value="" />
-          <br />
-          #{ifError 'password'}
-            <span class="error">#{error 'password' /}</span>
-            <br/>
-          #{/ifError}
-	      <input type="checkbox" name="remember" id="remember" value="true" ${flash.remember ? 'checked="true"' : ''} />
-	      <label for="remember">&{'secure.remember'}</label>
-          <br />
-          <br />
-          <a onclick="$('#login').submit();" class="button"><span>&{'button_login'}</span></a>
-          <a href="#" class="button"><span>&{'text_forgotten'}</span></a>
-        </div>
-      </form>
+        #{login url:flash.url /}
     </div>
   </div>
 #{set 'moreScripts'}

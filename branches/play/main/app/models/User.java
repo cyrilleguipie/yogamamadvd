@@ -3,6 +3,8 @@ package models;
 import java.util.*;
 import javax.persistence.*;
 
+import controllers.Account;
+
 import play.data.validation.*;
 import play.db.jpa.*;
 
@@ -17,6 +19,7 @@ public class User extends Model {
 
     @Required(message = "error_email")
     @Email(message = "error_email")
+    @CheckWith(Account.Unique.class)
     public String email;
 
     @Required(message = "error_telephone")

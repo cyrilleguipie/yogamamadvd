@@ -3,11 +3,17 @@ package models;
 import java.util.Map;
 import java.util.TreeMap;
 
+import play.Logger;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
+
 public class Cart {
     // sorted!
     public TreeMap<Long, Item> items = new TreeMap<Long, Item>();
     public Long quantity = 0L;
     public Double total = 0D;
+    public String shipment;
     
     public void reset() {
 	items.clear();
@@ -40,6 +46,22 @@ public class Cart {
 	    this.price = price;
 	    this.total += price * quantity;
 	}
+    }
+    
+    public static Cart fromJson(String json) {
+	if (json != null) {
+	    try {
+		return new Gson().fromJson(json, Cart.class);
+	    } catch (JsonParseException e) {
+		Logger.warn("Invalid cart, ingoring: %s, %s", json,
+		        e.getMessage());
+	    }
+	}
+	return new Cart();
+    }
+
+    public String toJson() {
+	return new Gson().toJson(this);
     }
 }
 

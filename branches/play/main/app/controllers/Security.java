@@ -6,14 +6,14 @@ import models.*;
 
 public class Security extends Secure.Security {
     @Before
-    static void setConnectedUser() throws Throwable {
+    static void setConnectedUser() {
 	if (Security.isConnected()) {
 	    User user = User.find("byEmail", Security.connected()).first();
 	    renderArgs.put("user", user.firstname);
 	}
     }
 
-    static boolean authenticate(String username, String password) {
+    static boolean authentify(String username, String password) {
 	return User.find("byEmailAndPassword", username, password).first() != null;
     }
 
@@ -24,9 +24,17 @@ public class Security extends Secure.Security {
 	return false;
     }
 
+    static void onAuthenticated() {
+	// stay on same page unless in account, see Account.logout()
+	String returnUrl = params.get("url");
+	if (returnUrl != null && !"".equals(returnUrl)) {
+	    redirect(returnUrl);
+	}
+    }
+
     static void onDisconnected() {
 	// stay on same page unless in account, see Account.logout()
 	String returnUrl = flash.get("url");
-	redirect(returnUrl == null ? Play.ctxPath + "/" : returnUrl);
+	redirect(returnUrl == null ? "/" : returnUrl);
     }
 }
