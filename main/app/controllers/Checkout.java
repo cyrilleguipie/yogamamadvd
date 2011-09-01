@@ -117,8 +117,16 @@ public class Checkout extends Controller {
 	cart();
     }
 
-    public static void checkout() {
+    public static void shipment() {
 	render();
+    }
+
+    public static void payment() {
+	render();
+    }
+
+    public static void checkout() {
+	shipment();
     }
     
 }
