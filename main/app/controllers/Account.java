@@ -1,7 +1,8 @@
 package controllers;
 
 import play.*;
-import play.data.validation.*;
+import play.data.validation.Check;
+import play.data.validation.Valid;
 import play.mvc.*;
 
 import java.util.*;
@@ -49,11 +50,29 @@ public class Account extends Controller {
 	}
     }
 
+    static User createShort(String firstname, String lastname, String email) {
+	User user = new User();
+	user.firstname = firstname;
+	user.lastname = lastname;
+	user.email = email;
+	user.save();
+	return user;
+    }
+
     public static void logout(String url) throws Throwable {
 	// stay on same page unless in account, see Seucrity.onDisconnected()
 	if (url != null && !url.contains("/account/")) {
 	    flash.put("url", url);
 	}
 	Secure.logout();
+    }
+    
+    public static class Unique extends Check {
+
+	@Override
+        public boolean isSatisfied(Object validatedObject, Object value) {
+	    setMessage("text_account_already", Play.ctxPath + "/secure/login?url=" + Play.ctxPath + "/checkout/shipment");
+	    return User.find("byEmail", value).first() == null;
+        }
     }
 }

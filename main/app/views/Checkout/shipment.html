@@ -6,16 +6,69 @@
 <h2>Форма заказа</h2>
 
 <p>Курс можно заказать следующими способами доставки:</p>
-<p><img align="left" style="margin-right:15px;" src="@{'/public/images'}/PostBox.jpg">
-1. <strong>DVD-диск с доставкой по почте в любую точку мира.</strong> </p>
-<p>Достоинство этого способа доставки в том, что вам придет лицензионный диск в красивой коробке
-и со всей полиграфией (обложка, графика диска).</p>
-<p>Обратная сторона медали: посылку придется подождать 4-12 дней, в зависимости от места вашего
-проживания и заплатить за доставку, что немного увеличит итоговую цену. </p>
-<p><img align="left" style="margin-right:15px;" src="@{'/public/images'}/download.jpg">
-2. <strong>Скачать курс с нашего сервера</strong>, оплатив его любым из представленных способов оплаты,
-кроме наложенного платежа.</p>
+<div id="accordion">
+<h3><a href="#">Скачать курс с нашего сервера</strong>, оплатив его любым из представленных способов оплаты,
+кроме наложенного платежа.</a></h3>
+<div class="login-content">
+<img align="left" style="margin-right:15px;" src="@{'/public/images'}/download.jpg">
 <p>Если вы выберете этот способ доставки, то сможете начать занятия по курсу гораздо быстрее.
 Как только оплата поступит на наш счет, вы получите ссылки на скачивание курса с нашего сервера. </p>
 <p>В этом способе вы экономите на доставке и времени, но с другой стороны у вас не будет физической копии курса.
 Также имейте в виду, что этот вариант подходит для тех, у кого быстрый и безлимитный доступ к Интернету. </p>
+  #{if !user}
+    <div class="left">
+      <form action="@{setShipmentWithCreate()}" method="post" enctype="multipart/form-data" id="shipment">
+      <input type="hidden" name="shipment" value="download"/>
+      <h2>&{'text_new_customer'}</h2>
+      <table class="form">
+        <tr>
+          <td><span class="required">*</span> &{'entry_firstname'}</td>
+          <td><input type="text" name="firstname" value="${flash['firstname']}" />
+            #{ifError 'firstname'}
+            <span class="error">#{error 'firstname'/}</span>
+            #{/ifError}</td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> &{'entry_lastname'}</td>
+          <td><input type="text" name="lastname" value="${flash['lastname']}" />
+            #{ifError 'lastname'}
+            <span class="error">#{error 'lastname'/}</span>
+            #{/ifError}</td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> &{'entry_email'}</td>
+          <td><input type="text" name="email" value="${flash['email']}" />
+            #{ifError 'email'}
+            <span class="error">#{error 'email'/}</span>
+            #{/ifError}</td>
+        </tr>
+      </table>
+      </form>
+    </div>
+    <div class="right">
+      #{login url:@shipment() /}
+    </div>
+  #{/if}
+  #{else}
+      <form action="@{setShipment()}" method="post" enctype="multipart/form-data" id="shipment">
+      <input type="hidden" name="shipment" value="download"/>
+  #{/else}
+  <a onclick="$('#shipment').submit();" class="button"><span>&{'button_continue'}</span></a>
+</div>
+<h3><a href="#">DVD-диск с доставкой по почте в любую точку мира.</a></h3>
+<div>
+<img align="left" style="margin-right:15px;" src="@{'/public/images'}/PostBox.jpg">
+<p>Достоинство этого способа доставки в том, что вам придет лицензионный диск в красивой коробке
+и со всей полиграфией (обложка, графика диска).</p>
+<p>Обратная сторона медали: посылку придется подождать 4-12 дней, в зависимости от места вашего
+проживания и заплатить за доставку, что немного увеличит итоговую цену. </p>
+</div>
+</div>
+
+#{set 'moreScripts'}
+<script type="text/javascript"><!--
+  $(function() {
+    $("#accordion").accordion();
+  });
+--></script>
+#{/set}

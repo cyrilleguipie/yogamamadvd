@@ -39,27 +39,35 @@
         <div id="logo"><img src="@{'/public/images'}/logo.png" alt="&{'logo'}" title="&{'logo'}"/></div>
 		<div id="container">
 		<div id="header">
-            <div id="product"><img src="@{'/public/images'}/product.png" alt="&{'product'}" title="&{'product'}"/></div>
-            <div id="menu">
-                <ul>
-                    <li><a href="@{Application.index()}">&{'text_home'}</a></li>
-                    <li><a href="@{Checkout.checkout()}">&{'text_order'}</a></li>
-                    <li><a href="@{Account.index()}">&{'text_account'}</a></li>
-                    <li><a href="#">&{'text_faq'}</a></li>
-                </ul>
-            </div>
-           <div class="heading">
-             <a href="@{Checkout.cart}"><span id="cart_total">&{'text_items', cart?.quantity, cart?.total}</span></a>
-           </div>
-		<!--div id="notification"></div-->
-		<div id="content"> #{doLayout /}</div>
-		<div id="footer">
-		  <ul>
-		    <li><a href="#">&{'text_affiliate'}</a></li>
-			<li><a href="#">&{'text_terms'}</a></li>
-		  </ul>
-		</div>
-		<div id="powered">&{'powered'}</div>
+          <div id="product"><img src="@{'/public/images'}/product.png" alt="&{'product'}" title="&{'product'}"/></div>
+          <div id="menu">
+            <ul>
+              <li><a href="@{Application.index()}">&{'text_home'}</a></li>
+              <li><a href="@{Checkout.checkout()}">&{'text_order'}</a></li>
+              <li><a href="@{Account.index()}">&{'text_account'}</a></li>
+              <li><a href="#">&{'text_faq'}</a></li>
+            </ul>
+          </div>
+          <div id="welcome">
+            #{if !user}
+            &{'text_welcome', actionBridge.Account.index().url, actionBridge.Account.register().url}
+            #{/if}
+            #{else}
+            &{'text_logged', actionBridge.Account.index().url, user, actionBridge.Account.logout(request.url).url}
+            #{/else}
+          </div>
+          <div class="heading">
+            <a href="@{Checkout.cart}"><span id="cart_total">&{'text_items', cart?.quantity, cart?.total}</span></a>
+          </div>
+		  <!--div id="notification"></div-->
+		  <div id="content"> #{doLayout /}</div>
+		  <div id="footer">
+		    <ul>
+		      <li><a href="#">&{'text_affiliate'}</a></li>
+			  <li><a href="#">&{'text_terms'}</a></li>
+		    </ul>
+		  </div>
+		  <div id="powered">&{'powered'}</div>
 		</div>
 	</body>
 </html>
