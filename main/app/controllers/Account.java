@@ -9,7 +9,7 @@ import java.util.*;
 
 import models.*;
 
-@With({ Security.class, Checkout.class })
+@With(Security.class)
 public class Account extends Controller {
 
     @Before(unless = { "login", "register", "create" })

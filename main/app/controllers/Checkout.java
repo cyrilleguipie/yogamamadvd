@@ -14,6 +14,7 @@ import play.Logger;
 import play.data.validation.CheckWith;
 import play.data.validation.Email;
 import play.data.validation.Required;
+import play.data.validation.Valid;
 import play.libs.Crypto;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -22,6 +23,13 @@ import play.mvc.With;
 
 @With(Security.class)
 public class Checkout extends Controller {
+
+    @Before(unless = {"shipment", "downloadAndRegister", "shipAndRegister"})
+    static void checkConnected() throws Throwable {
+	 if(!Security.isConnected()) {
+	     shipment();
+	 }
+    }
 
     @Before
     static void setCart() throws Throwable {
@@ -103,11 +111,12 @@ public class Checkout extends Controller {
 	cart();
     }
 
-    public static void shipment() {
-	render();
+    public static void shipment() throws Throwable {
+	Object countries = Geonames.getCountries().get("geonames");
+	render(countries);
     }
 
-    public static void payment() {
+    public static void payment() throws Throwable {
 	if (getCart().shipment != null) {
 	    render();
 	} else {
@@ -115,40 +124,59 @@ public class Checkout extends Controller {
 	}
     }
 
-    public static void checkout() {
+    public static void checkout() throws Throwable {
 	shipment();
     }
 
-    public static void setShipment(@Required String shipment) {
-	if (!validation.hasErrors()) {
-	    Cart cart = getCart();
-	    cart.shipment = shipment;
-	    setCookie("cart", cart.toJson());
-	    payment();
+    static void setShipment(String shipment) throws Throwable {
+	Cart cart = getCart();
+	cart.shipment = shipment;
+	setCookie("cart", cart.toJson());
+    }
+
+    public static void download() throws Throwable {
+	setShipment("download");
+	payment();
+    }
+    
+
+    static void registerAndNext(User user) throws Throwable {
+	user.save();
+	Security.setConnectedUser(user);
+	payment();
+    }
+
+    public static void downloadAndRegister(@Valid User user) throws Throwable {
+	setShipment("download");
+	if (validation.hasError("user.firstname")
+		|| validation.hasError("user.lastname")
+		|| validation.hasError("user.email")) {
+	    flash.error("error_validation");
+	    params.flash(); // add http parameters to the flash scope
+	    validation.keep(); // keep the errors for the next request
+	    shipment();
+	} else {
+	    registerAndNext(user);
+	}
+    }
+
+    public static void ship() throws Throwable {
+	setShipment("ship");
+	payment();
+    }
+
+    public static void shipAndRegister(@Valid User user) throws Throwable {
+	setShipment("ship");
+	Map errors = validation.errorsMap();
+	if (errors.size() == 3 && errors.containsKey("user")
+		&& errors.containsKey("user.password")
+		&& errors.containsKey("user.confirm")) {
+	    registerAndNext(user);
 	} else {
 	    flash.error("error_validation");
 	    params.flash(); // add http parameters to the flash scope
 	    validation.keep(); // keep the errors for the next request
-	    Checkout.shipment();
+	    shipment();
 	}
     }
-
-    public static void setShipmentWithCreate(@Required(message = "error_firstname") String firstname,
-	    @Required(message = "error_lastname") String lastname,
-	    @Required(message = "error_email") @Email(message = "error_email")
-	    @CheckWith(Account.Unique.class) String email,
-	    @Required String shipment) {
-	if (!validation.hasErrors()) {
-	    User user = Account.createShort(firstname, lastname, email);
-	    session.put("username", user.email);
-	    Security.setConnectedUser();
-	    setShipment(shipment);
-	} else {
-	    flash.error("error_validation");
-	    params.flash(); // add http parameters to the flash scope
-	    validation.keep(); // keep the errors for the next request
-	    Checkout.shipment();
-	}
-    }
-
 }

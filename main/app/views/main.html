@@ -56,9 +56,11 @@
             &{'text_logged', actionBridge.Account.index().url, user, actionBridge.Account.logout(request.url).url}
             #{/else}
           </div>
+          #{if cart}
           <div class="heading">
             <a href="@{Checkout.cart}"><span id="cart_total">&{'text_items', cart?.quantity, cart?.total}</span></a>
           </div>
+          #{/if}
 		  <!--div id="notification"></div-->
 		  <div id="content"> #{doLayout /}</div>
 		  <div id="footer">

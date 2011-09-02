@@ -12,6 +12,11 @@ public class Security extends Secure.Security {
 	    renderArgs.put("user", user.firstname);
 	}
     }
+    
+    static void setConnectedUser(User user) {
+	session.put("username", user.email);
+	renderArgs.put("user", user.firstname);
+    }
 
     static boolean authentify(String username, String password) {
 	return User.find("byEmailAndPassword", username, password).first() != null;
