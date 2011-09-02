@@ -1166,8 +1166,9 @@ a.button:hover span {
 }
 .checkout-content {
 	padding: 0px 0px 15px 0px;
-	display: none;
+	display: block;
 	overflow: auto;
+	background: #FFFFFF !important;
 }
 .checkout-content .left {
 	float: left;
