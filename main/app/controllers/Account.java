@@ -71,7 +71,11 @@ public class Account extends Controller {
 
 	@Override
         public boolean isSatisfied(Object validatedObject, Object value) {
-	    setMessage("text_account_already", Play.ctxPath + "/secure/login?url=" + Play.ctxPath + "/checkout/shipment");
+	    String url = Play.ctxPath + "/secure/login";
+	    if (params.get("url") != null) {
+		url += "?url=" + params.get("url");
+	    }
+	    setMessage("text_account_already", url);
 	    return User.find("byEmail", value).first() == null;
         }
     }
