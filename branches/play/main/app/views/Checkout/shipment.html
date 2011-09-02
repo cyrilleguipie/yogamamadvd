@@ -19,6 +19,7 @@
     <div class="left">
       <form action="@{setShipmentWithCreate()}" method="post" enctype="multipart/form-data" id="shipment">
       <input type="hidden" name="shipment" value="download"/>
+      <input type="hidden" name="url" value="@{shipment}"/>
       <h2>&{'text_new_customer'}</h2>
       <table class="form">
         <tr>
