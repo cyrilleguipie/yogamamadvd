@@ -11,7 +11,7 @@
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}"/>
 		<script type="text/javascript" src="@{'/public/javascripts/jquery/jquery-1.6.1.min.js'}" charset="${_response_encoding}"></script>
 		<script type="text/javascript" src="@{'/public/javascripts/jquery/ui/jquery-ui-1.8.9.custom.min.js'}"></script>
-		<link rel="stylesheet" type="text/css" href="@{'/public/javascripts/jquery/ui/themes/ui-lightness/jquery-ui-1.8.9.custom.css'}" />
+		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/start/jquery-ui.css" />
 		<script type="text/javascript" src="@{'/public/javascripts/jquery/ui/external/jquery.cookie.js'}"></script>
 		<script type="text/javascript" src="@{'/public/javascripts/jquery/fancybox/jquery.fancybox-1.3.4.pack.js'}"></script>
 		<link rel="stylesheet" type="text/css" href="@{'/public/javascripts/jquery/fancybox/jquery.fancybox-1.3.4.css'}" media="screen" />
@@ -34,8 +34,8 @@
         #{get 'moreScripts' /}
     </head>
     <body>
-        <div id="logo"><img src="@{'/public/images'}/logo.png" alt="&{'logo'}" title="&{'logo'}"/></div>
 		<div id="container">
+        <div id="logo"><img src="@{'/public/images'}/logo.png" alt="&{'logo'}" title="&{'logo'}"/></div>
 		<div id="header">
           <div id="product"><img src="@{'/public/images'}/product.png" alt="&{'product'}" title="&{'product'}"/></div>
           <div id="menu">
