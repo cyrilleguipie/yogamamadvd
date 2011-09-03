@@ -63,47 +63,7 @@
           <td>&{'entry_address_2'}</td>
           <td><input type="text" name="user.address_2" value="${flash['user.address_2']}" /></td>
         </tr>
-        <tr>
-          <td><span class="required">*</span> &{'entry_city'}</td>
-          <td><input type="text" name="user.city" value="${flash['user.city']}" />
-            #{ifError 'user.city'}
-            <span class="error">#{error 'user.city'/}</span>
-            #{/ifError}</td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> &{'entry_postcode'}</td>
-          <td><input type="text" name="user.postcode" value="${flash['user.postcode']}" />
-            #{ifError 'user.postcode'}
-            <span class="error">#{error 'user.postcode'/}</span>
-            #{/ifError}</td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> &{'entry_country'}</td>
-          <td><select name="user.country_id" onchange="loadZones(this.value)    ;">
-              <option value="">&{'text_select'}</option>
-              #{list items:_countries, as:'country'}
-              #{if country.geonameId?.asString == flash['user.country_id']}
-              <option value="${country.geonameId?.asString}" selected="selected">${country.countryName?.asString}</option>
-              #{/if}
-              #{else}
-              <option value="${country.geonameId?.asString}">${country.countryName?.asString}</option>
-              #{/else}
-              #{/list}
-            </select>
-            <input id="country" type="hidden" name="user.country" value="${flash['user.country']}"/>
-            #{ifError 'user.country'}
-            <span class="error">#{error 'user.country'/}</span>
-            #{/ifError}</td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> &{'entry_zone'}</td>
-          <td><select name="user.zone_id" onchange="$('#zone').attr('value', $('select[name=\'user.zone_id\'] option:selected').text());">
-            </select>
-            <input id="zone" type="hidden" name="user.zone" value="${flash['user.zone']}"/>
-            #{ifError 'user.zone'}
-            <span class="error">#{error 'user.zone'/}</span>
-            #{/ifError}</td>
-        </tr>
+        #{geonames-autocomplete /}
       </table>
     </div>
     #{/if}
@@ -162,36 +122,13 @@
     #{/if}
     #{else}
     <div class="buttons">
-      <div class="right"><a onclick="$('#register${_shipment}').submit();" class="button"><span>&{'button_continue'}</span></a></div>
+      <a onclick="$('#register${_shipment}').submit();" class="button"><span>&{'button_continue'}</span></a>
     </div>
     #{/else}
   </form>
   
 #{set 'moreScripts'}
-<script type="text/javascript"><!--
-function loadZones(country_id) {
-  if (country_id != undefined && country_id.length > 0) {
-    $('#country').attr('value', $('select[name=\'user.country_id\'] option:selected').text());
-
-    $.getJSON("@{Geonames.zones()}" + "?countryId=" + country_id, null, function(j){
-      var options = '<option value="">&{'text_select'}</option>';
-      for (var i = 0; i < j.geonames.length; i++) {
-        if (j.geonames[i].geonameId == "${flash['user.zone_id']}") {
-          options += '<option value="' + j.geonames[i].geonameId  + '" selected="selected">' + j.geonames[i].name + '</option>';
-        } else {
-          options += '<option value="' + j.geonames[i].geonameId + '">' + j.geonames[i].name + '</option>';
-        }
-      }
-      $('select[name=\'user.zone_id\']').html(options);
-    })
-  }
-}
-
-$(function() {
-  loadZones($('select[name=\'user.country_id\']')[0].value);
-})
-
-//--></script> 
+#{get 'moreScripts' /}
 <script type="text/javascript"><!--
 $('.fancybox').fancybox({
     width: 560,

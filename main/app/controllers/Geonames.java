@@ -65,7 +65,12 @@ public class Geonames extends Controller {
 
     }
 
-    // JSON
+    public static void countries() throws IOException {
+	JsonObject countries = getCountries();
+	renderJSON(countries.toString());
+    }
+
+
     public static void zones(@Required String countryId) throws IOException {
 	if (!validation.hasErrors()) {
 	    JsonObject zones = getGeonames("childrenJSON?geonameId="
@@ -75,8 +80,4 @@ public class Geonames extends Controller {
 	    error("countryId is required");
 	}
     }
-
-    // TODO: autocomplete cities:
-    // http://ws.geonames.org/searchJSON?featureClass=P&country=US&style=short
-    // but it requires countryCode instead of geonameId
 }

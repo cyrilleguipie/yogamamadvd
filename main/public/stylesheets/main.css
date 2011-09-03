@@ -8,7 +8,7 @@ body {
 	font-family: "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
 	margin: 0px;
 	padding: 0px;
-   background: #FFFFFF url('../images/bg.png') center repeat-y;
+    background: #FFFFFF url('../images/bg.png') center repeat-y;
 	
 }
 body, td, th, input, textarea, select, a {
@@ -35,7 +35,7 @@ form {
 	display: inline;
 }
 input[type='text'], input[type='password'], textarea {
-	background: #F8F8F8;
+	background-color: #F8F8F8;
 	border: 1px solid #CCCCCC;
 	padding: 3px;
 	margin-left: 0px;
@@ -51,11 +51,11 @@ label {
 }
 /* layout */
 #logo {
-    position: absolute;
-    left: 180px;
+    width: 0;
+    float: left;
 }
 #container {
-	width: 880px;
+	width: 1064px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: left;
@@ -85,6 +85,8 @@ label {
 	padding-bottom: 4px;
 	position: relative;
 	z-index: 99;
+	width: 880px;
+	margin: auto;
 }
 #header #product {
 	width: 400px;
@@ -1168,7 +1170,6 @@ a.button:hover span {
 	padding: 0px 0px 15px 0px;
 	display: block;
 	overflow: auto;
-	background: #FFFFFF !important;
 }
 .checkout-content .left {
 	float: left;
