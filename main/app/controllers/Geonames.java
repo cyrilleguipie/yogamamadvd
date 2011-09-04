@@ -23,27 +23,32 @@ public class Geonames extends Controller {
 	return geonames.getAsJsonObject();
     }
 
-    private static JsonObject getGeonames(String ws) throws IOException {
-	VirtualFile vf = VirtualFile.fromRelativePath("/cache/geonames-"
-	        + ws.replace('?', '_') + "-" + Lang.get() + ".json.gz");
-	if (!vf.exists()) {
-	    WS.HttpResponse response = WS.url(
-		    "http://ws.geonames.org/" + ws + "&style=short&lang="
-		            + Lang.get()).get();
-	    InputStream in = response.getStream();
-	    OutputStream out = new GZIPOutputStream(vf.outputstream());
-	    int count;
-	    byte data[] = new byte[512];
-	    while ((count = in.read(data, 0, 512)) > 0) {
-		out.write(data, 0, count);
+    private static JsonObject getGeonames(String ws) {
+    	VirtualFile vf = VirtualFile.fromRelativePath("/cache/geonames-"
+    	        + ws.replace('?', '_') + "-" + Lang.get() + ".json.gz");
+    	try {
+	    if (!vf.exists()) {
+		WS.HttpResponse response = WS.url(
+		        "http://ws.geonames.org/" + ws + "&style=short&lang="
+		                + Lang.get()).get();
+		InputStream in = response.getStream();
+		OutputStream out = new GZIPOutputStream(vf.outputstream());
+		int count;
+		byte data[] = new byte[512];
+		while ((count = in.read(data, 0, 512)) > 0) {
+		    out.write(data, 0, count);
+		}
+		out.flush();
+		out.close();
 	    }
-	    out.flush();
-	    out.close();
+	    return getGeonamesLocal(vf);
+	} catch (IOException e) {
+	    Logger.error(e, "Can't create geonames file {1} : {2}", vf.getName(), e.getMessage());
+	    return new JsonObject();
 	}
-	return getGeonamesLocal(vf);
     }
 
-    static JsonObject getCountries() throws IOException {
+    static JsonObject getCountries() {
 	return getGeonames("countryInfoJSON?maxRows=300");
     }
 
@@ -65,13 +70,13 @@ public class Geonames extends Controller {
 
     }
 
-    public static void countries() throws IOException {
+    public static void countries() {
 	JsonObject countries = getCountries();
 	renderJSON(countries.toString());
     }
 
 
-    public static void zones(@Required String countryId) throws IOException {
+    public static void zones(@Required String countryId) {
 	if (!validation.hasErrors()) {
 	    JsonObject zones = getGeonames("childrenJSON?geonameId="
 		    + countryId);

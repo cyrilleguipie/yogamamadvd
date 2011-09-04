@@ -14,6 +14,7 @@ public class Cart {
     public Long quantity = 0L;
     public Double total = 0D;
     public String shipment;
+    public String gateway;
     
     public void reset() {
 	items.clear();

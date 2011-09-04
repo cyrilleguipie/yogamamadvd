@@ -9,7 +9,6 @@ body {
 	margin: 0px;
 	padding: 0px;
     background: #FFFFFF url('../images/bg.png') center repeat-y;
-	
 }
 body, td, th, input, textarea, select, a {
 	font-size: 12px;

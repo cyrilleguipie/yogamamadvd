@@ -1,16 +1,22 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import models.Cart;
+import models.PaymentGateway;
+import models.PaymentGatewayCategory;
 import models.User;
 import models.Cart.Item;
 import models.Product;
 
 import play.Logger;
+import play.Play;
+import play.data.validation.Check;
 import play.data.validation.CheckWith;
 import play.data.validation.Email;
 import play.data.validation.Required;
@@ -25,14 +31,14 @@ import play.mvc.With;
 public class Checkout extends Controller {
 
     @Before(unless = {"shipment", "downloadAndRegister", "shipAndRegister"})
-    static void checkConnected() throws Throwable {
+    static void checkConnected() {
 	 if(!Security.isConnected()) {
 	     shipment();
 	 }
     }
 
     @Before
-    static void setCart() throws Throwable {
+    static void setCart() {
 	Cart cart = Cart.fromJson(getCookie("cart"));
 	renderArgs.put("cart", cart);
     }
@@ -76,6 +82,9 @@ public class Checkout extends Controller {
 
     public static void cart() {
 	Cart cart = getCart();
+	if (cart.gateway == null) {
+	    payment();
+	}
 	List<Product> products = new LinkedList<Product>();
 	for (Long productId : cart.items.keySet()) {
 	    Product product = Product.findById(productId);
@@ -111,42 +120,32 @@ public class Checkout extends Controller {
 	cart();
     }
 
-    public static void shipment() throws Throwable {
+    ///////////////////////////////////////////////////////////////////////////
+
+    public static void shipment() {
 	Object countries = Geonames.getCountries().get("geonames");
 	render(countries);
     }
 
-    public static void payment() throws Throwable {
-	if (getCart().shipment != null) {
-	    render();
-	} else {
-	    shipment();
-	}
-    }
-
-    public static void checkout() throws Throwable {
-	shipment();
-    }
-
-    static void setShipment(String shipment) throws Throwable {
+    static void setShipment(String shipment) {
 	Cart cart = getCart();
 	cart.shipment = shipment;
 	setCookie("cart", cart.toJson());
     }
 
-    public static void download() throws Throwable {
+    public static void download() {
 	setShipment("download");
 	payment();
     }
     
 
-    static void registerAndNext(User user) throws Throwable {
+    static void registerAndNext(User user) {
 	user.save();
 	Security.setConnectedUser(user);
 	payment();
     }
 
-    public static void downloadAndRegister(@Valid User user) throws Throwable {
+    public static void downloadAndRegister(@Valid User user) {
 	setShipment("download");
 	if (validation.hasError("user.firstname")
 		|| validation.hasError("user.lastname")
@@ -160,12 +159,12 @@ public class Checkout extends Controller {
 	}
     }
 
-    public static void ship() throws Throwable {
+    public static void ship() {
 	setShipment("ship");
 	payment();
     }
 
-    public static void shipAndRegister(@Valid User user) throws Throwable {
+    public static void shipAndRegister(@Valid User user) {
 	setShipment("ship");
 	Map errors = validation.errorsMap();
 	if (errors.size() == 3 && errors.containsKey("user")
@@ -179,4 +178,49 @@ public class Checkout extends Controller {
 	    shipment();
 	}
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+
+    public static void payment() {
+	if (getCart().shipment != null) {
+	    Map<PaymentGatewayCategory, List<PaymentGateway>> gateways =
+		new HashMap<PaymentGatewayCategory, List<PaymentGateway>>();
+	    List<PaymentGatewayCategory> categories = PaymentGatewayCategory.findAll();
+	    for (PaymentGatewayCategory category : categories) {
+		//List<PaymentGatewayToCategory> gwsToC = PaymentGatewayToCategory.find("byCategory", category).fetch();
+		List<PaymentGateway> gws = PaymentGateway.findByCategory(category);
+		gateways.put(category, gws);
+	    }
+	    render(gateways);
+	} else {
+	    shipment();
+	}
+    }
+
+    public static void setPayment(@CheckWith(Checkout.ValidGateway.class) String gateway) {
+	if (validation.hasErrors()) {
+	    flash.error("error_validation");
+	    params.flash(); // add http parameters to the flash scope
+	    validation.keep(); // keep the errors for the next request
+	    payment();
+	} else {
+	    Cart cart = getCart();
+	    cart.gateway = gateway;
+	    setCookie("cart", cart.toJson());
+	    cart();
+	}
+    }
+
+    public static class ValidGateway extends Check {
+	@Override
+        public boolean isSatisfied(Object validatedObject, Object value) {
+	    setMessage("error_payment_gateway");
+	    return PaymentGateway.find("byName", value).first() != null;
+        }
+    }
+
+    public static void checkout() {
+	shipment();
+    }
+
 }
