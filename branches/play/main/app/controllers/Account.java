@@ -33,12 +33,12 @@ public class Account extends Controller {
 	render();
     }
 
-    public static void register() throws Throwable {
+    public static void register() {
 	Object countries = Geonames.getCountries().get("geonames");
 	render(countries);
     }
 
-    public static void create(@Valid User user) throws Throwable {
+    public static void create(@Valid User user) {
 	if (!validation.hasErrors()) {
 	    user.save();
 	    index();
