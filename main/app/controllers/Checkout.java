@@ -82,9 +82,6 @@ public class Checkout extends Controller {
 
     public static void cart() {
 	Cart cart = getCart();
-	if (cart.gateway == null) {
-	    payment();
-	}
 	List<Product> products = new LinkedList<Product>();
 	for (Long productId : cart.items.keySet()) {
 	    Product product = Product.findById(productId);
@@ -207,7 +204,7 @@ public class Checkout extends Controller {
 	    Cart cart = getCart();
 	    cart.gateway = gateway;
 	    setCookie("cart", cart.toJson());
-	    cart();
+	    product();
 	}
     }
 
@@ -218,9 +215,62 @@ public class Checkout extends Controller {
 	    return PaymentGateway.find("byName", value).first() != null;
         }
     }
+    
+    ///////////////////////////////////////////////////////////////////////////
+    
+    public static void product() {
+	Cart cart = getCart();
+	if (cart.gateway == null) {
+	    payment();
+	}
+	List<Product> products = Product.findAll();
+	render(products);
+    }
+
+    public static void setProduct(@Required(message = "error_product") List<Long> products, @Required Map<String, String> qties) {
+	if (validation.hasErrors()) {
+	    flash.error("error_validation");
+	    params.flash(); // add http parameters to the flash scope
+	    validation.keep(); // keep the errors for the next request
+	    product();
+	} else {
+	    Cart cart = getCart();
+	    cart.reset();
+
+	    for (Long productId : products) {
+		Product product = Product.findById(productId);
+		if (product != null) {
+		    Long qty = Long.parseLong(qties.get(productId.toString()));
+		    cart.add(productId, qty, product.price);
+		}
+	    }
+
+	    setCookie("cart", cart.toJson());
+	    checkout();
+	}
+
+    }
+
+    //////////////////////////////////////////////////////////////////////////
 
     public static void checkout() {
-	shipment();
+	Cart cart = getCart();
+	if (cart.items.size() > 0) {
+	    List<Product> all = Product.findAll();
+	    List<Product> available = new LinkedList<Product>();
+	    List<Product> selected = new LinkedList<Product>();
+	    for (Product product: all) {
+		if (cart.items.containsKey(product.id)) {
+		    selected.add(product);
+		} else {
+		    available.add(product);
+		}
+	    }
+	    render(selected, available);
+	} else {
+	    cart();
+	}
+	
     }
 
 }
