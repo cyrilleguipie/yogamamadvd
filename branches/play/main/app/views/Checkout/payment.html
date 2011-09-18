@@ -7,7 +7,7 @@
 
 <p>Курс можно оплатить следующими способами:</p>
 
-<form action="@{setPayment()}" method="post" enctype="multipart/form-data" id="register${_shipment}">
+<form action="@{setPayment()}" method="post" enctype="multipart/form-data" id="payment">
   
 #{ifError 'gateway'}
 <div class="warning">#{error 'gateway'/}</div>
@@ -17,27 +17,22 @@
   #{list items:gateways.keySet(), as:'category'}
   <h3><a name="${category.name}">&{'pgwc_' + category.name}</strong></a></h3>
   <div class="checkout-content">
-    <div class="content">
-      <div class="product-list">
-        #{list items:gateways[category], as:'gateway'}
-    
-          <div class="custom-radio">
-          <input id="radio-${category.name}-${gateway.name}" type="radio" value="${gateway.name}" name="gateway">
-          <label for="radio-${category.name}-${gateway.name}">&{'pgw_' + gateway.name}
-            <img alt="подсказка" src="@{'/public/images/help.gif'}" class="tip_help" title="&{'pgw_' + gateway.name + '_tooltip'}">
-            <div class="right"><img alt="картинка" src="@{'/public/images'}/${gateway.name}.png"></div>
-          </label>
-          </div>
-        #{/list}
+    #{list items:gateways[category], as:'gateway'}
+      <div class="pgw">
+      <input id="radio-${category.name}-${gateway.name}" type="radio" value="${gateway.name}" name="gateway">
+      <label for="radio-${category.name}-${gateway.name}">&{'pgw_' + gateway.name}
+        <img alt="подсказка" src="@{'/public/images/help.gif'}" class="tip_help" title="&{'pgw_' + gateway.name + '_tooltip'}">
+        <div><img alt="картинка" src="@{'/public/images'}/${gateway.name}.png"></div>
+      </label>
       </div>
-    </div>
+    #{/list}
   </div>
   #{/list}
 </div>
 
 <div class="checkout-content">
   <div class="buttons">
-    <a onclick="$('#register${_shipment}').submit();" class="button"><span>&{'button_continue'}</span></a>
+    <a onclick="$('#payment').submit();" class="button"><span>&{'button_continue'}</span></a>
   </div>
 </div>
 
