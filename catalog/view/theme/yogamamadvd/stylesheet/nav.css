@@ -50,7 +50,7 @@
 }
 
 #nav ul li:nth-child(1) {
-  background: url("../images/ui-bg_glass-1.png") left top;
+  background: url("../image/ui-bg_glass-1.png") left top;
   -moz-border-radius-bottomleft: 5px;
   -moz-border-radius-topleft: 5px;
   -webkit-border-bottom-left-radius: 5px;
@@ -64,19 +64,19 @@
 
 #nav ul li:nth-child(2) {
   z-index: 3;
-  background: url("../images/ui-bg_glass-2.png") left top;
+  background: url("../image/ui-bg_glass-2.png") left top;
   width: 215px;
 }
 
 #nav ul li:nth-child(3) {
   z-index: 2;
-  background: url("../images/ui-bg_glass-3.png") left top;
+  background: url("../image/ui-bg_glass-3.png") left top;
   width: 215px;
 }
 
 #nav ul li:nth-child(4) {
   z-index: 1;
-  background: url("../images/ui-bg_glass-4.png") left top;
+  background: url("../image/ui-bg_glass-4.png") left top;
   -moz-border-radius-bottomright: 5px;
   -moz-border-radius-topright: 5px;
   -webkit-border-bottom-right-radius: 5px;
