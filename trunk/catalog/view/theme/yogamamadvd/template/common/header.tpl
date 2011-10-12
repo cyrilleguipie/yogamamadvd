@@ -11,7 +11,7 @@
 <meta name="keywords" content="<?php echo $keywords; ?>" />
 <?php } ?>
 <?php if ($icon) { ?>
-<link href="<?php echo $icon; ?>" rel="icon" />
+<link href="<?php echo $icon; ?>" rel="shortcut icon" type="image/png" />
 <?php } ?>
 <?php foreach ($links as $link) { ?>
 <link href="<?php echo $link['href']; ?>" rel="<?php echo $link['rel']; ?>" />
@@ -22,6 +22,10 @@
 <?php foreach ($styles as $style) { ?>
 <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
 <?php } ?>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/start/jquery-ui.css" />
+<!--
 <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.1.min.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.9.custom.min.js"></script>
 <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.9.custom.css" />
@@ -30,6 +34,28 @@
 <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
 <script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/common.js"></script>
+-->
+<?php foreach ($scripts as $script) { ?>
+<script type="text/javascript" src="<?php echo $script; ?>"></script>
+<?php } ?>
+
+<script type="text/javascript" src="catalog/view/javascript/sammy.min/sammy.js" charset="utf-8"></script>
+<script type="text/javascript" src="catalog/view/javascript/sammy.min/plugins/sammy.tmpl.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/sammy.min/plugins/sammy.storage.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8.1/jquery.validate.min.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/app/i18n.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/app/main.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/app/checkout.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/app/account.js"></script>
+
+<link rel="stylesheet" href="catalog/view/theme/yogamamadvd/stylesheet/customInput.css">
+<link rel="stylesheet" href="catalog/view/theme/yogamamadvd/stylesheet/tipTip.css">
+<script type="text/javascript" src="catalog/view/javascript/jquery/customInput.jquery.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/jquery.tipTip.minified.js"></script>
+
+<script type="text/javascript" src="catalog/view/javascript/jquery/jquery.json-2.3.min.js"></script>
+
 <?php foreach ($scripts as $script) { ?>
 <script type="text/javascript" src="<?php echo $script; ?>"></script>
 <?php } ?>
@@ -54,9 +80,9 @@ DD_belatedPNG.fix('#logo img');
         <div id="product"><img src="catalog/view/theme/yogamamadvd/image/product.png" alt="<?php echo $name; ?>" title="<?php echo $name; ?>"/></div>
         <div id="menu">
           <ul>
-            <li><a href="<?php echo $home; ?>"><?php echo $text_home; ?></a></li>
+            <li><a href="#/"><?php echo $text_home; ?></a></li>
             <li><a href="#/checkout/checkout"><?php echo $text_order; ?></a></li>
-            <li><a href="index.php?route=account/account"><?php echo $text_account; ?></a></li>
+            <li><a href="#/account/account"><?php echo $text_account; ?></a></li>
             <li><a href="#"><?php echo $text_faq; ?></a></li>
           </ul>
         </div>
