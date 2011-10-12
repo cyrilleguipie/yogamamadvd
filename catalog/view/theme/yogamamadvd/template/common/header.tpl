@@ -17,6 +17,8 @@
 <link href="<?php echo $link['href']; ?>" rel="<?php echo $link['rel']; ?>" />
 <?php } ?>
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/yogamamadvd/stylesheet/stylesheet.css" />
+<link rel="stylesheet" media="screen" href="catalog/view/theme/yogamamadvd/stylesheet/menu.css" type="text/css" >
+<link rel="stylesheet" media="screen" href="catalog/view/theme/yogamamadvd/stylesheet/nav.css" type="text/css" >
 <?php foreach ($styles as $style) { ?>
 <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
 <?php } ?>
@@ -42,36 +44,30 @@ DD_belatedPNG.fix('#logo img');
 </script>
 <![endif]-->
 <?php echo $google_analytics; ?>
-<script type="text/javascript">
-$(document).ready(function() {
-	$('div[id ^= "background"]').height($('#container').height());
-});
-</script>
 </head>
 <body>
-<div id="wrapper">
-<div id="background-left"></div>
-<div id="background-right"></div>
 <div id="container">
-<div id="header">
-  <div class="heading">
-	  <div id="welcome">
-	    <?php if (!$logged) { ?>
-	    <?php echo $text_welcome; ?>
-	    <?php } else { ?>
-	    <?php echo $text_logged; ?>
-	    <?php } ?>
-	  </div>
-
-    <a href="index.php?route=checkout/cart"><span id="cart_total"><?php echo $text_items; ?></span></a></div>
-
-<div id="menu">
-  <ul>
-	<li><a href="#" style="padding: 7px; "><img src="catalog/view/theme/yogamamadvd/image/ylogos.png" width="24"></a></li>
-	<li><a href="<?php echo $home; ?>"><?php echo $text_home; ?></a></li>
-    <li><a href="index.php?route=product/category&amp;path=59"><?php echo $text_order; ?></a></a>
-	<li><a href="index.php?route=information/contact"><?php echo $text_contact; ?></a></li>
-	<li><a href="#"><?php echo $text_faq; ?></a></li>
-  </ul>
-</div>
-<div id="notification"></div>
+  <?php if ($logo) { ?>
+  <div id="logo"><img src="<?php echo $logo; ?>" alt="<?php echo $name; ?>" title="<?php echo $name; ?>"/></div>
+  <?php } ?>
+  <div id="header">
+        <div id="product"><img src="catalog/view/theme/yogamamadvd/image/product.png" alt="<?php echo $name; ?>" title="<?php echo $name; ?>"/></div>
+        <div id="menu">
+          <ul>
+            <li><a href="<?php echo $home; ?>"><?php echo $text_home; ?></a></li>
+            <li><a href="#/checkout/checkout"><?php echo $text_order; ?></a></li>
+            <li><a href="index.php?route=account/account"><?php echo $text_account; ?></a></li>
+            <li><a href="#"><?php echo $text_faq; ?></a></li>
+          </ul>
+        </div>
+        <div id="welcome">
+          <?php if (!$logged) { ?>
+          <?php echo $text_welcome; ?>
+          <?php } else { ?>
+          <?php echo $text_logged; ?>
+          <?php } ?>
+        </div>
+        <div class="heading">
+          <a href="#"><span id="cart_total">&nbsp;</span></a>
+        </div>
+    <div id="notification"></div>
