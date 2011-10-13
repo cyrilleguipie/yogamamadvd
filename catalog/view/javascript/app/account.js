@@ -19,7 +19,7 @@
     });
 
     app.post('#/account/login', function(context) {
-      $.ajax({url:'../ws/connect', data: context.params.toHash(), type: 'post',
+      $.ajax({url:'index.php?route=account/loginx', data: context.params.toHash(), type: 'post',
         success: function(user) {
           app.store.set('user', user);
           var url = context.params._url;
